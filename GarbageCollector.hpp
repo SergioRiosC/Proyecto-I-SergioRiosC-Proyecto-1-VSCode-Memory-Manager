@@ -1,18 +1,27 @@
 #include <iostream>
 #include <random>
 
-template <typename T>
+//template <typename T>
+
+using namespace std;
 
 class Collector{
     private:
         // primer espacio memEspc, segundo espacio
         int referencias[3][2];
         int referenceCnt = 0;
-        Collector *garbageColector;
-        
+        static Collector *garbageColector;
+
     public:
         Collector(){
-            garbage = NULL; 
+            garbageColector = NULL; 
+            referenceCnt = 0;
+        }
+
+        static Collector* myCollector(){
+            if(garbageColector == NULL)
+                garbageColector = new Collector();
+            return garbageColector;
         }
 
 
@@ -47,8 +56,8 @@ class Collector{
                 if (referencias[i][1] == -1)
                 {
                     cout<<"se intenta borrar "<<i;
-                    T ptr = referencias[i][0] 
-                    delete ptr;
+                    int *ptr = &referencias[i][0]; 
+                    delete[] ptr;
 
                 }
                 
