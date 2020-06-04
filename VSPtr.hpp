@@ -12,6 +12,7 @@ private:
     VSPTR(){
         dato = new T();
         id = -1;
+        Collector::myCollector(); 
     };
     
     
@@ -25,8 +26,8 @@ public:
     ~VSPTR(){
         cout<<"ID="<<this->id<<"\n";
         if(this->id != -1){
-            delete[] dato;
-            cout<<"se elimino\n";
+            Collector* collector =Collector::myCollector();            
+            collector->dereference(this->id);
         }
     };
 
@@ -38,9 +39,15 @@ public:
 
         if(this->id == -1){
             *this->dato = dato;
-            this->id = ;
+            this->id = Collector::myCollector()->addPtr(&*this->dato);
             cout<<"ID operador ="<<this->id<<"\n";
+            
+            Collector::myCollector()->reference(this->id);
+        }else
+        {
+            *this->dato = dato;
         }
+        
     };
 
 
