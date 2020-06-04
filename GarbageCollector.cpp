@@ -10,7 +10,7 @@ Collector* Collector::garbageColector = NULL;
 Collector::Collector(){
     referenceCnt = 0;
     garbageColector = NULL;
-};
+}
 
 Collector *Collector::myCollector(){
     if(garbageColector == NULL){
@@ -18,17 +18,17 @@ Collector *Collector::myCollector(){
         cout<<"Se inicializo el Garbage\n";
     }
     return garbageColector;
-};
+}
 
 int Collector::addPtr(int *memEspc){
     if(garbageColector->referenceCnt != 3){
-        cout<<"Se agrego "<<referenceCnt<<"\n";
+        cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
         garbageColector->referencias[referenceCnt][0] = *memEspc;
         garbageColector->referencias[referenceCnt][1]++;
         return garbageColector->referenceCnt++;
     }
     return -1;
-};
+}
 
 void Collector::dereference(int id){
     if (id != -1)
@@ -40,14 +40,14 @@ void Collector::dereference(int id){
         garbageColector->garbage();
     }
             
-};
+}
 
 void Collector::reference(int id){
     if (id != -1)
     {
         garbageColector->referencias[id][1]++;
     } 
-};
+}
 
 void Collector::garbage(){
     for(int i=0;i<garbageColector->referenceCnt;i++){
@@ -60,4 +60,4 @@ void Collector::garbage(){
         }
         
     }
-};
+}
