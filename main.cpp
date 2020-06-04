@@ -11,10 +11,20 @@
 //using namespace rapidjson;
 using namespace std;
 
-int main() {
+void func(){
     VSPTR<int> myPtr = VSPTR<int>::New();
     *myPtr = 5;
+
+}
+
+int main() {
+    VSPTR<int> myPtr = VSPTR<int>::New();
+    cout << "1\n";
+    *myPtr = 5;
+    cout << "2\n";
     int valor;
+    cout << "3\n";
     valor = &myPtr;
     cout << valor;
+    func();
 }

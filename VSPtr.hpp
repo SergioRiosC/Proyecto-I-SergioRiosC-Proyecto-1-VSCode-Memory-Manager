@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <random>
+#include "GarbageCollector.hpp"
 using namespace std;
 
 template <typename T>
@@ -22,9 +23,10 @@ public:
     };
     
     ~VSPTR(){
+        cout<<"ID="<<this->id<<"\n";
         if(this->id != -1){
             delete[] dato;
-            cout<<"se elimino";
+            cout<<"se elimino\n";
         }
     };
 
@@ -33,7 +35,12 @@ public:
     };
 
     void  operator =(T dato){
-        *this->dato = dato;
+
+        if(this->id == -1){
+            *this->dato = dato;
+            this->id = ;
+            cout<<"ID operador ="<<this->id<<"\n";
+        }
     };
 
 
