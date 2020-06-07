@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include <random>
-#include "GarbageCollector.hpp"
+#include "GarbageCollector.cpp"
 
 using namespace std;
 
@@ -9,23 +9,21 @@ template <typename T>
 class VSPTR{
 private:
     T *dato;
-    int id;
+    int id;  
+    
+public:
+
     VSPTR(){
         dato = new T();
+        cout<<"nuevo espacio de memoria "<<dato<<"\n";
         id = -1;
         Collector::myCollector(); 
     };
-    
-    
-
-
-public:
     static VSPTR<T> New(){
         return VSPTR<T>();
     };
     
     ~VSPTR(){
-        cout<<"ID="<<this->id<<"\n";
         if(this->id != -1){
             Collector* collector =Collector::myCollector();            
             collector->dereference(this->id);
@@ -36,14 +34,16 @@ public:
         return *this;
     };
 
+
+
     void  operator =(T dato){
 
         if(this->id == -1){
             *this->dato = dato;
-            this->id = Collector::myCollector()->addPtr(&*this->dato);
-            cout<<"ID operador ="<<this->id<<"\n";
+            this->id = Collector::myCollector()->addPtr(this->dato);
+            //cout<<"ID operador ="<<this->id<<"\n";
             
-            Collector::myCollector()->reference(this->id);
+            //Collector::myCollector()->reference(this->id);
         }else
         {
             *this->dato = dato;

@@ -18,14 +18,33 @@ void func(){
 
 }
 
+void func2(){
+    VSPTR<int> myPtr = VSPTR<int>::New();
+    *myPtr = 5;
+
+}
+
+void activar_thread(){
+    Collector *garbage = Collector::myCollector();
+    garbage->llamador();
+
+}
+
 int main() {
+    thread thr(activar_thread);
     VSPTR<int> myPtr = VSPTR<int>::New();
     cout << "1\n";
     *myPtr = 5;
-    cout << "2\n";
+    /*cout << "2\n";
     int valor;
     cout << "3\n";
     valor = &myPtr;
-    cout << valor;
+    cout << valor<<"\n";
+    sleep(4);
     func();
+    sleep(4);
+    func2();
+    sleep(4);*/
+    thr.join();
+    //cout<<"hola";
 }

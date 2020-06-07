@@ -7,23 +7,28 @@
 class Collector{
     private:
         // primer espacio memEspc, segundo espacio
-        int referencias[3][2];
         int referenceCnt;
         static Collector *garbageColector;
 
     public:
+        int *memSps[3];
+        int referencias[3];
+
         Collector();
 
-        static Collector *myCollector(){}
+        ~Collector();
 
+        void llamador();
 
-        int addPtr(int *memEspc){}
+        static Collector *myCollector();
 
-        void dereference(int id){}
+        int addPtr(int *memEspc);
 
-        void reference(int id){}
+        void dereference(int id);
 
-        void garbage(){}
+        void reference(int id);
+
+        void garbage();
 
 };
 
