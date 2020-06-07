@@ -15,17 +15,32 @@ using namespace std;
 
 int sock;
 
+void rec(int sock){
+    char buf[MAX];
+    FILE *fp=fopen("C.json","a");
+    if(!fp){cerr<<"error abriendo el archivo ";return;}
+    int fs_block=recv(sock, buf,MAX,0);
+    
+    while( fs_block>0 ){
+        
+        int wrt=fwrite(buf, sizeof(char), fs_block, fp);
+        if(wrt<fs_block){cout<<"Error escribiendo en Cli"<<endl;break;}
+        bzero(buf,MAX);
+        if(fs_block==0 || fs_block!=512){break;}
+    }
+    fclose(fp);
+}
+
 void sendFile(int sock){
-   
     string line;
     char buf[MAX];
-    FILE * fp=fopen("FILENAME","r");
+    FILE * fp=fopen("Cliente.json","r");
     if(fp!=NULL){
         bzero(buf,MAX);
         int fs_block;
         while((fs_block=fread(buf, sizeof(char), MAX, fp) )){
             if(send(sock, buf, fs_block, 0)<0 ){
-                cout<<"error enviando el archivo"<<endl;
+                cout<<"error enviando el archivo Cliente"<<endl;
                 break;
             }
             bzero(buf,MAX);
@@ -34,10 +49,11 @@ void sendFile(int sock){
     fclose(fp);
 }
 int main(){
+    cout<<"Cli\n";
    string ipAddress = "127.0.0.1";
    string p;
    string ip;
-   cout<<"Ingrese el puerto del Servidor: "<<endl;
+  cout<<"Ingrese el puerto del Servidor: "<<endl;
    cout<<">";
    while(true){
        getline(cin,p);
@@ -73,7 +89,7 @@ int main(){
     int b=0;
     int c=0;
     bool e=true;
-    
+    int bytesReceived;
     do {
         if(b==0){
             int bytesReceived = recv(sock, buf, 4096, 0);
@@ -88,28 +104,33 @@ int main(){
         }
         //	Envia al servidor
         int sendRes = send(sock, userInput.c_str(), userInput.size() + 1, 0);
-        if (sendRes == -1)
-        {
+        if (sendRes == -1){
             cout << "Could not send to server! Whoops!\r\n";
             continue;
         }
-        
-        //	Espera la respuesta
-        memset(buf, 0, 4096);
-        int bytesReceived = recv(sock, buf, 4096, 0);
-        if (bytesReceived == -1)
-        {
+        if(userInput[0]=='I' && userInput[1]=='D'){
+            rec(sock);
+            userInput="";
+        }else{
+            
+            //	Espera la respuesta
+            memset(buf, 0, 4096);
+            bytesReceived = recv(sock, buf, 4096, 0);
+            }
+        if (bytesReceived == -1){
             cout << "There was an error getting response from server\r\n";
         }
-        else
-        {
+        else{
+            
             // Muestra la respuesta
             cout << "SERVER> " << string(buf, bytesReceived) << "\r\n";
         }
-        if(e){
+        if(userInput=="ENV"){
             sendFile(sock);
-            e=false;
-        }
+            //e=false;
+            userInput="";
+            }
+        
     } while(true);
     //	Cierra el socket
     close(sock);

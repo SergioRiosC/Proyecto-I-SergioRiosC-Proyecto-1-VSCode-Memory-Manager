@@ -12,22 +12,50 @@ using namespace std;
 #pragma comment(lib,"ws2_32.lib")
 int listening;
 int ClientSocket;
+char bufRec[MAX];
+char bufEnv[MAX];
+int ID=20;
 
-void recFile(int sock){
+string recFile(int sock){
+    bzero(bufRec,MAX);
+    string n=to_string(ID)+".json";
     
-    char buf[MAX];
-    FILE *fp=fopen("FILENAME","a");
-    if(!fp){cerr<<"error abriendo el archivo ";return;}
-    int fs_block=recv(ClientSocket, buf,MAX,0);
+    char name[n.length()+1];
+    strcpy(name,n.c_str());
+    cout<<"name: "<<name<<endl;
+    FILE *fp=fopen(name,"a");
+    if(!fp){cerr<<"error abriendo el archivo ";return "ERROR";}
+    int fs_block=recv(ClientSocket, bufRec,MAX,0);
     
     while( fs_block>0 ){
-        int wrt=fwrite(buf, sizeof(char), fs_block, fp);
+        int wrt=fwrite(bufRec, sizeof(char), fs_block, fp);
         if(wrt<fs_block){cout<<"Error escribiendo en srv"<<endl;break;}
-        bzero(buf,MAX);
+        bzero(bufRec,MAX);
         if(fs_block==0 || fs_block!=512){break;}
     }
     fclose(fp);
+    return to_string(ID);
 }
+void env(int sock,string n){
+    string line;
+    bzero(bufEnv,MAX);
+    char name[n.length()+1];
+    strcpy(name,n.c_str());
+    FILE * fp=fopen(name,"r");
+    if(fp!=NULL){
+        bzero(bufEnv,MAX);
+        int fs_block;
+        while((fs_block=fread(bufEnv, sizeof(char), MAX, fp) )>1){
+            if(send(ClientSocket, bufEnv, fs_block, 0)<0 ){
+                cout<<"error enviando el archivo Server"<<endl;
+                break;
+            }
+            bzero(bufEnv,MAX);
+        }
+    }
+    fclose(fp);
+}
+
 int MServer( ) {
     string contra="827ccb0eea8a706c4c34a16891f84e7b"; //Clave "12345" encriptada en MD5
     listening=socket(AF_INET,SOCK_STREAM,0);
@@ -73,31 +101,52 @@ int MServer( ) {
     }  
     char buf[4096];
     string msg;
+    string id;
     int b=0;
     int r=0;
-    
+    bool B=false;
     while(true){     
         memset(buf,0,4096);
         msg="";
-            int bytesRecv=recv(ClientSocket,buf,4096,0);
-            if(bytesRecv==-1){
-                cerr<< "Problema de coneccion"<< endl;
-                break;
-            }
-            if(bytesRecv==0){
-                cout<<"Desconectado"<<endl;
-                break;
-            }
-            msg=string(buf,0,bytesRecv);
-            if(b==0 && msg!=contra){
-                msg="contraseña incorrecta, digitela correctamente";
-            }
+        int bytesRecv=recv(ClientSocket,buf,4096,0);
+        if(bytesRecv==-1){
+            cerr<< "Problema de coneccion"<< endl;
+            break;
+        }
+        if(bytesRecv==0){
+            cout<<"Desconectado"<<endl;
+            break;
+        }
+        msg=string(buf,0,bytesRecv);
+        if(b==0 && msg!=contra){
+            msg="contraseña incorrecta, digitela correctamente";
+        }else{
             b=1;
-            send(ClientSocket,msg.c_str(),msg.size()+1,0);
-            if(r==0){
-                recFile(listening);
-                r=1;
+            if(msg[0]=='I' && msg[1]=='D'){
+            string n=msg.substr(3);
+               n=n+".json";
+               cout<<"n: "<<n<<endl;
+                env(ClientSocket,n);
+                
+            }else {
+                 
             }
+        }
+        if(B){
+            msg=id;
+            B=false;
+        }
+        send(ClientSocket,msg.c_str(),msg.size()+1,0);
+        if(msg=="ENV"){
+                    id="ID: "+recFile(listening);
+                    ID+=1;
+                    r=1;
+                    cout<<"return: "<<id<<endl;
+                    cout<<"ID: "<<ID<<endl;
+                    B=true;
+                } 
+            
+            
     }
     //Cerrar el socket
     close(ClientSocket);
