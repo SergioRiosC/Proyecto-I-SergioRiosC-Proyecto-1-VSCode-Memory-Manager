@@ -12,24 +12,28 @@
 #include "Server.cpp"
 #define MAX 100
 using namespace std;
-
-void rec(int sock){
-    char buf[MAX];
+int sock;
+char buf[MAX];
+void rec(){
+    bzero(buf,MAX);
     FILE *fp=fopen("C.json","a");
     if(!fp){cerr<<"error abriendo el archivo ";return;}
+    cout<<"buf antes: "<<buf<<endl;
     int fs_block=recv(sock, buf,MAX,0);
-    
+    cout<<"rec.json"<<buf<<endl;
     while( fs_block>0 ){
         
         int wrt=fwrite(buf, sizeof(char), fs_block, fp);
         if(wrt<fs_block){cout<<"Error escribiendo en Cli"<<endl;break;}
+        //cout<<"C.json"<<buf<<endl;
         bzero(buf,MAX);
         if(fs_block==0 || fs_block!=512){break;}
     }
+    bzero(buf,MAX);
     fclose(fp);
 }
 
-void sendFile(int sock){
+void sendFile(){
     string line;
     char buf[MAX];
     FILE * fp=fopen("Cliente.json","r");
@@ -41,9 +45,11 @@ void sendFile(int sock){
                 cout<<"error enviando el archivo Cliente"<<endl;
                 break;
             }
+            
             bzero(buf,MAX);
         }
     }
+    bzero(buf,MAX);
     fclose(fp);
 }
 int main(){
@@ -67,7 +73,7 @@ int main(){
            break;
        }else{cout<<"IP incorrecta, intente de nuevo"<<endl;cout<<">";}
    }
-    int sock = socket(AF_INET, SOCK_STREAM, 0);
+    sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock == -1){
         cout<<"FALLO EN SOCKEY";
         return 1;
@@ -109,7 +115,7 @@ int main(){
             continue;
         }
         if(userInput[0]=='I' && userInput[1]=='D'){
-            rec(sock);
+            rec();
             userInput="";
         }else{
             
@@ -126,7 +132,7 @@ int main(){
             cout << "SERVER> " << string(buf, bytesReceived) << "\r\n";
         }
         if(userInput=="ENV"){
-            sendFile(sock);
+            sendFile();
             //e=false;
             userInput="";
             }

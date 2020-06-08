@@ -10,11 +10,13 @@
 #define MAX 100
 using namespace std;
 #pragma comment(lib,"ws2_32.lib")
-
+int listening;
+int ClientSocket;
+char bufRec[MAX];
+char bufEnv[MAX];
 int ID=20;
 
-string recFile(int ClientSocket){
-    char bufRec[MAX];
+string recFile(){
     bzero(bufRec,MAX);
     string n=to_string(ID)+".json";
     
@@ -24,7 +26,7 @@ string recFile(int ClientSocket){
     FILE *fp=fopen(name,"a");
     if(!fp){cerr<<"error abriendo el archivo ";return "ERROR";}
     int fs_block=recv(ClientSocket, bufRec,MAX,0);
-    
+   
     while( fs_block>0 ){
         int wrt=fwrite(bufRec, sizeof(char), fs_block, fp);
         if(wrt<fs_block){cout<<"Error escribiendo en srv"<<endl;break;}
@@ -34,8 +36,7 @@ string recFile(int ClientSocket){
     fclose(fp);
     return to_string(ID);
 }
-void env(int ClientSocket,string n){
-    char bufEnv[MAX];
+void env(string n){
     string line;
     bzero(bufEnv,MAX);
     char name[n.length()+1];
@@ -44,7 +45,8 @@ void env(int ClientSocket,string n){
     if(fp!=NULL){
         bzero(bufEnv,MAX);
         int fs_block;
-        while((fs_block=fread(bufEnv, sizeof(char), MAX, fp) )>1){
+        while((fs_block=fread(bufEnv, sizeof(char), MAX, fp) )>0){
+            cout<<"env.json  "<<bufEnv<<endl;
             if(send(ClientSocket, bufEnv, fs_block, 0)<0 ){
                 cout<<"error enviando el archivo Server"<<endl;
                 break;
@@ -57,7 +59,7 @@ void env(int ClientSocket,string n){
 
 int MServer( ) {
     string contra="827ccb0eea8a706c4c34a16891f84e7b"; //Clave "12345" encriptada en MD5
-    int listening=socket(AF_INET,SOCK_STREAM,0);
+    listening=socket(AF_INET,SOCK_STREAM,0);
     if(listening==-1){
         cerr<<"no se pudo crear el socket";
         return -1;
@@ -81,7 +83,7 @@ int MServer( ) {
     socklen_t  clientSize= sizeof(client);
     char host[NI_MAXHOST];
     char svc[NI_MAXSERV];
-    int ClientSocket=accept(listening, (sockaddr*)&client, &clientSize);  
+    ClientSocket=accept(listening, (sockaddr*)&client, &clientSize);  
     if(ClientSocket==-1){
         cerr<<"problema con la coneccion";
         return -4;
@@ -125,27 +127,25 @@ int MServer( ) {
             string n=msg.substr(3);
                n=n+".json";
                cout<<"n: "<<n<<endl;
-                env(ClientSocket,n);
-                
-            }else {
-                 
-            }
-        }
-        if(B){
-            msg=id;
-            B=false;
-        }
-        send(ClientSocket,msg.c_str(),msg.size()+1,0);
-        if(msg=="ENV"){
-                    id="ID: "+recFile(listening);
-                    ID+=1;
-                    r=1;
-                    cout<<"return: "<<id<<endl;
-                    cout<<"ID: "<<ID<<endl;
-                    B=true;
-                } 
+                env(n);
+            }else{
+                if(B){
+                    msg=id;
+                    B=false;
+                }
+                send(ClientSocket,msg.c_str(),msg.size()+1,0);
+
+            }    
+            if(msg=="ENV"){
+                id="ID: "+recFile();
+                ID+=1;
+                r=1;
+                cout<<"return: "<<id<<endl;
+                cout<<"ID: "<<ID<<endl;
+                B=true;
+            } 
             
-            
+        }    
     }
     //Cerrar el socket
     close(ClientSocket);
