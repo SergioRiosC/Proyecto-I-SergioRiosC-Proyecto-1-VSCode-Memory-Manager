@@ -10,13 +10,11 @@
 #define MAX 100
 using namespace std;
 #pragma comment(lib,"ws2_32.lib")
-int listening;
-int ClientSocket;
-char bufRec[MAX];
-char bufEnv[MAX];
+
 int ID=20;
 
-string recFile(int sock){
+string recFile(int ClientSocket){
+    char bufRec[MAX];
     bzero(bufRec,MAX);
     string n=to_string(ID)+".json";
     
@@ -36,7 +34,8 @@ string recFile(int sock){
     fclose(fp);
     return to_string(ID);
 }
-void env(int sock,string n){
+void env(int ClientSocket,string n){
+    char bufEnv[MAX];
     string line;
     bzero(bufEnv,MAX);
     char name[n.length()+1];
@@ -58,7 +57,7 @@ void env(int sock,string n){
 
 int MServer( ) {
     string contra="827ccb0eea8a706c4c34a16891f84e7b"; //Clave "12345" encriptada en MD5
-    listening=socket(AF_INET,SOCK_STREAM,0);
+    int listening=socket(AF_INET,SOCK_STREAM,0);
     if(listening==-1){
         cerr<<"no se pudo crear el socket";
         return -1;
@@ -82,7 +81,7 @@ int MServer( ) {
     socklen_t  clientSize= sizeof(client);
     char host[NI_MAXHOST];
     char svc[NI_MAXSERV];
-    ClientSocket=accept(listening, (sockaddr*)&client, &clientSize);  
+    int ClientSocket=accept(listening, (sockaddr*)&client, &clientSize);  
     if(ClientSocket==-1){
         cerr<<"problema con la coneccion";
         return -4;

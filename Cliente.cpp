@@ -13,8 +13,6 @@
 #define MAX 100
 using namespace std;
 
-int sock;
-
 void rec(int sock){
     char buf[MAX];
     FILE *fp=fopen("C.json","a");
@@ -69,8 +67,9 @@ int main(){
            break;
        }else{cout<<"IP incorrecta, intente de nuevo"<<endl;cout<<">";}
    }
-    sock = socket(AF_INET, SOCK_STREAM, 0);
+    int sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock == -1){
+        cout<<"FALLO EN SOCKEY";
         return 1;
     }
     sockaddr_in hint;
@@ -81,6 +80,7 @@ int main(){
     //	Conecta al servidor en el socket
     int connectRes = connect(sock, (sockaddr*)&hint, sizeof(hint));
     if (connectRes == -1){
+        cout<<"FALLO AL CONECTAR";
         return 2;
     }
     
