@@ -1,6 +1,3 @@
-
-#include <iostream>
-#include <random>
 #include "GarbageCollector.cpp"
 
 using namespace std;

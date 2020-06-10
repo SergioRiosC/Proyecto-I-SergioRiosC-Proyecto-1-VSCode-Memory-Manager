@@ -1,5 +1,4 @@
 #include "GarbageCollector.hpp"
-#include <iostream>
 #include <thread>
 #include "pthread.h"
 #include <chrono>
@@ -7,7 +6,7 @@
 
 using namespace std;
 
-bool collector_activado = false;
+bool  Collector::collector_activado = false;
 Collector* Collector::garbageColector = NULL;
 
 Collector::Collector(){

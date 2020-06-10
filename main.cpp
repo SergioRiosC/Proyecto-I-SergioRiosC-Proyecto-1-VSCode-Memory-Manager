@@ -4,10 +4,8 @@
 #include "include/rapidjson/istreamwrapper.h"
 #include "include/rapidjson/ostreamwrapper.h"*/
 #include "VSPtr.hpp"
-#include <iostream>
 #include <fstream>
 #include <unistd.h>
-#include "GarbageCollector.hpp"
 
 //using namespace rapidjson;
 using namespace std;

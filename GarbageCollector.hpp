@@ -15,6 +15,7 @@ class Collector{
     public:
         /*int *memSps[3];
         int referencias[3];*/
+        static bool collector_activado;
         Lista<int> *lista = new Lista<int>();
         Lista<double> *listaD = new Lista<double>();
         Lista<long> *listaL = new Lista<long>();
