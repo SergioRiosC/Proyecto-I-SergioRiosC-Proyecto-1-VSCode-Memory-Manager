@@ -7,20 +7,20 @@
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
-//#include "GarbageCollector.hpp"
+#include "GarbageCollector.hpp"
 
 //using namespace rapidjson;
 using namespace std;
 
 void func(){
-    VSPTR<int> myPtr = VSPTR<int>::New();
-    *myPtr = 5;
+    VSPTR<double> myPtr = VSPTR<double>::New();
+    *myPtr = 7;
 
 }
 
 void func2(){
     VSPTR<int> myPtr = VSPTR<int>::New();
-    *myPtr = 5;
+    *myPtr = 9;
 
 }
 
@@ -31,11 +31,18 @@ void activar_thread(){
 }
 
 int main() {
+    
+
+    /*int a;
+    const char *b = typeid(a).name();
+    if(*b == 'i')
+        cout<<"entero";*/
+    
     thread thr(activar_thread);
     VSPTR<int> myPtr = VSPTR<int>::New();
     cout << "1\n";
     *myPtr = 5;
-    /*cout << "2\n";
+    cout << "2\n";
     int valor;
     cout << "3\n";
     valor = &myPtr;
@@ -44,7 +51,7 @@ int main() {
     func();
     sleep(4);
     func2();
-    sleep(4);*/
+    sleep(4);
     thr.join();
     //cout<<"hola";
 }

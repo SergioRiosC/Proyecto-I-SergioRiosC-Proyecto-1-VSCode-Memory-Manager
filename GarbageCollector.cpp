@@ -3,6 +3,7 @@
 #include <thread>
 #include "pthread.h"
 #include <chrono>
+//#include "Lista.hpp"
 
 using namespace std;
 
@@ -28,13 +29,24 @@ Collector *Collector::myCollector(){
     return garbageColector;
 }
 
+
 int Collector::addPtr(int *memEspc){
     if(garbageColector->referenceCnt != 3){
-        garbageColector->memSps[referenceCnt] = memEspc;
+        garbageColector->lista->agregarNodo(memEspc,referenceCnt);
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
-        garbageColector->referencias[referenceCnt]++;
         cout<<"Espacio de memoria " <<memEspc<<"\n";
-        cout<<"Referencias a la id " <<referenceCnt <<": " <<garbageColector->referencias[referenceCnt]<<"\n";
+        cout<<"Referencias a la id " <<referenceCnt <<": " <<1<<"\n";
+        return garbageColector->referenceCnt++;
+    }
+    return -1;
+}
+
+int Collector::addPtr(double *memEspc){
+    if(garbageColector->referenceCnt != 3){
+        garbageColector->listaD->agregarNodo(memEspc,referenceCnt);
+        cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
+        cout<<"Espacio de memoria " <<memEspc<<"\n";
+        cout<<"Referencias a la id " <<referenceCnt <<": " <<1<<"\n";
         return garbageColector->referenceCnt++;
     }
     return -1;
@@ -43,12 +55,9 @@ int Collector::addPtr(int *memEspc){
 void Collector::dereference(int id){
     if (id != -1)
     {
-        if(garbageColector->referencias[id] == 1){
-            garbageColector->referencias[id] -= 2;
-        }
-        else
-            garbageColector->referencias[id]--;
-        cout<<"Referencias a la id " <<id <<": " <<garbageColector->referencias[id]<<"\n";
+        
+        garbageColector->lista->dereference(id);
+        garbageColector->listaD->dereference(id);
         //garbageColector->garbage();
     }
             
@@ -57,31 +66,42 @@ void Collector::dereference(int id){
 void Collector::reference(int id){
     if (id != -1)
     {
-        garbageColector->referencias[id]++;
-        cout<<"Referencias a la id " <<id <<": " <<garbageColector->referencias[id]<<"\n";
+        garbageColector->lista->reference(id);
     } 
 }
 
 void Collector::garbage(){
+    Nodo<int> *aux = garbageColector->lista->getHead();
+    while(aux != NULL){
+        if(aux->getReferencias() == -1)
+            garbageColector->lista->eliminarNodo(aux);
+        aux = aux->getSig();
+    }
+    
+    Nodo<double> *aux2 = garbageColector->listaD->getHead();
+    while(aux2 != NULL){
+        if(aux2->getReferencias() == -1)
+            garbageColector->listaD->eliminarNodo(aux2);
+        aux2 = aux2->getSig();
+    }
+    
+    /*
     for(int i=0;i<garbageColector->referenceCnt;i++){
-        if (garbageColector->referencias[i] == -1)
+        
+        if (garbageColector->lista->getReferencias(i) == -1)
         {
-            cout<<"se intenta borrar "<<i<<"\n";
-            int *ptr;
-            ptr = garbageColector->memSps[i]; 
-            delete[] ptr;
-            garbageColector->referencias[i] = 0;
+            garbageColector->lista->eliminarNodo(i);
         }
         
-    }
+    }*/
 }
 
 void Collector::llamador(){
     while (collector_activado)
     {        
-        //cout<<"Se está llamando al GarbageCollector \n";
+        cout<<"Se está llamando al GarbageCollector \n";
         garbageColector->garbage();
-        //std::this_thread::sleep_for(std::chrono::seconds(1));        
+        std::this_thread::sleep_for(std::chrono::seconds(1));        
     }
     
 }

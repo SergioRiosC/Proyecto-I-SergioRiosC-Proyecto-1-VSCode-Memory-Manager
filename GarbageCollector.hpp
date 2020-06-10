@@ -1,6 +1,8 @@
 #ifndef GARBAGECOLLECTOR_H
 #define GARBAGECOLLECTOR_H
 
+#include "Lista.hpp"
+
 
 //template <typename T>
 
@@ -11,8 +13,10 @@ class Collector{
         static Collector *garbageColector;
 
     public:
-        int *memSps[3];
-        int referencias[3];
+        /*int *memSps[3];
+        int referencias[3];*/
+        Lista<int> *lista = new Lista<int>();
+        Lista<double> *listaD = new Lista<double>();
 
         Collector();
 
@@ -23,13 +27,13 @@ class Collector{
         static Collector *myCollector();
 
         int addPtr(int *memEspc);
+        
+        int addPtr(double *memEspc);
 
         void dereference(int id);
 
         void reference(int id);
 
         void garbage();
-
-};
-
+};   
 #endif
