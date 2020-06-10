@@ -28,6 +28,7 @@ public:
         this->sig = NULL;
         cout<<"Desde Nodo(): dato = "<<*newDato<<" memEspc = "<<newDato<<"\n";
     };
+
     void agregar_referencia(){
         this->referencias++;
     }
@@ -140,7 +141,7 @@ public:
         
     }
 
-    void dereference(int id){
+    bool dereference(int id){
         cout<<"Desde dereference: llamando buscador\n";
         Nodo<L> *aux = buscarNodo(id);
         if(aux != NULL){
@@ -151,10 +152,13 @@ public:
                 aux->setReferenecias(auxReferencias - 1);
 
             cout << "Referencias a la id " << id <<": " << aux->getReferencias() <<"\n";
+            
+            return true;
         
         }else
             cout<<"Desde dereference: No se encontro el nodo"<<id<<"\n";
-        
+
+            return false;
         
     }
 

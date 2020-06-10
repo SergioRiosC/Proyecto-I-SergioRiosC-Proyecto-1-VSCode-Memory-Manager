@@ -40,12 +40,9 @@ public:
 
         if(this->id == -1){
             *this->dato = dato;
-            if(*typeid(dato).name() == 'i')
-                this->id = Collector::myCollector()->addPtr(this->dato);
-            else if (*typeid(dato).name() == 'd')
-            {
-                this->id = Collector::myCollector()->addPtr(this->dato);
-            }
+            this->id = Collector::myCollector()->addPtr(this->dato);
+           
+            
             
             //cout<<"ID operador ="<<this->id<<"\n";
             

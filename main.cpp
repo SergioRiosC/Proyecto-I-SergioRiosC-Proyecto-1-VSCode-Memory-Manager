@@ -19,8 +19,8 @@ void func(){
 }
 
 void func2(){
-    VSPTR<int> myPtr = VSPTR<int>::New();
-    *myPtr = 9;
+    VSPTR<char> myPtr = VSPTR<char>::New();
+    *myPtr = 'c';
 
 }
 
@@ -52,6 +52,7 @@ int main() {
     sleep(4);
     func2();
     sleep(4);
+    cout<<&myPtr;
     thr.join();
     //cout<<"hola";
 }

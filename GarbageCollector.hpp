@@ -17,6 +17,9 @@ class Collector{
         int referencias[3];*/
         Lista<int> *lista = new Lista<int>();
         Lista<double> *listaD = new Lista<double>();
+        Lista<long> *listaL = new Lista<long>();
+        Lista<float> *listaF = new Lista<float>();
+        Lista<char> *listaC = new Lista<char>();
 
         Collector();
 
@@ -29,6 +32,12 @@ class Collector{
         int addPtr(int *memEspc);
         
         int addPtr(double *memEspc);
+
+        int addPtr(float *memEspc);
+
+        int addPtr(long *memEspc);
+
+        int addPtr(char *memEspc);
 
         void dereference(int id);
 

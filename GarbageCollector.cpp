@@ -31,33 +31,59 @@ Collector *Collector::myCollector(){
 
 
 int Collector::addPtr(int *memEspc){
-    if(garbageColector->referenceCnt != 3){
         garbageColector->lista->agregarNodo(memEspc,referenceCnt);
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
         cout<<"Espacio de memoria " <<memEspc<<"\n";
         cout<<"Referencias a la id " <<referenceCnt <<": " <<1<<"\n";
         return garbageColector->referenceCnt++;
-    }
-    return -1;
 }
 
 int Collector::addPtr(double *memEspc){
-    if(garbageColector->referenceCnt != 3){
         garbageColector->listaD->agregarNodo(memEspc,referenceCnt);
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
         cout<<"Espacio de memoria " <<memEspc<<"\n";
         cout<<"Referencias a la id " <<referenceCnt <<": " <<1<<"\n";
         return garbageColector->referenceCnt++;
-    }
-    return -1;
+}
+
+int Collector::addPtr(float *memEspc){
+        garbageColector->listaF->agregarNodo(memEspc,referenceCnt);
+        cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
+        cout<<"Espacio de memoria " <<memEspc<<"\n";
+        cout<<"Referencias a la id " <<referenceCnt <<": " <<1<<"\n";
+        return garbageColector->referenceCnt++;
+}
+
+int Collector::addPtr(long *memEspc){
+        garbageColector->listaL->agregarNodo(memEspc,referenceCnt);
+        cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
+        cout<<"Espacio de memoria " <<memEspc<<"\n";
+        cout<<"Referencias a la id " <<referenceCnt <<": " <<1<<"\n";
+        return garbageColector->referenceCnt++;
+}
+
+int Collector::addPtr(char *memEspc){
+        garbageColector->listaC->agregarNodo(memEspc,referenceCnt);
+        cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
+        cout<<"Espacio de memoria " <<memEspc<<"\n";
+        cout<<"Referencias a la id " <<referenceCnt <<": " <<1<<"\n";
+        return garbageColector->referenceCnt++;
 }
 
 void Collector::dereference(int id){
     if (id != -1)
     {
         
-        garbageColector->lista->dereference(id);
-        garbageColector->listaD->dereference(id);
+        if(garbageColector->lista->dereference(id))
+            return;
+        else if(garbageColector->listaD->dereference(id))
+            return;
+        else if(garbageColector->listaF->dereference(id))
+            return;
+        else if(garbageColector->listaL->dereference(id))
+            return;
+        else if(garbageColector->listaC->dereference(id))
+            return;
         //garbageColector->garbage();
     }
             
@@ -67,6 +93,10 @@ void Collector::reference(int id){
     if (id != -1)
     {
         garbageColector->lista->reference(id);
+        garbageColector->listaD->reference(id);
+        /*garbageColector->listaF->reference(id);
+        garbageColector->listaL->reference(id);
+        garbageColector->listaC->reference(id);*/
     } 
 }
 
@@ -83,6 +113,27 @@ void Collector::garbage(){
         if(aux2->getReferencias() == -1)
             garbageColector->listaD->eliminarNodo(aux2);
         aux2 = aux2->getSig();
+    }
+    
+    Nodo<float> *aux3 = garbageColector->listaF->getHead();
+    while(aux3 != NULL){
+        if(aux3->getReferencias() == -1)
+            garbageColector->listaF->eliminarNodo(aux3);
+        aux3 = aux3->getSig();
+    }
+    
+    Nodo<long> *aux4 = garbageColector->listaL->getHead();
+    while(aux4 != NULL){
+        if(aux4->getReferencias() == -1)
+            garbageColector->listaL->eliminarNodo(aux4);
+        aux4 = aux4->getSig();
+    }
+    
+    Nodo<char> *aux5 = garbageColector->listaC->getHead();
+    while(aux5 != NULL){
+        if(aux5->getReferencias() == -1)
+            garbageColector->listaC->eliminarNodo(aux5);
+        aux5 = aux5->getSig();
     }
     
     /*
