@@ -26,6 +26,7 @@ public:
         this->id = id;
         this->referencias++;
         this->sig = NULL;
+        this->ant = NULL;
         cout<<"Desde Nodo(): dato = "<<*newDato<<" memEspc = "<<newDato<<"\n";
     };
 

@@ -1,10 +1,18 @@
 #ifndef GARBAGECOLLECTOR_H
 #define GARBAGECOLLECTOR_H
 
+#include "include/rapidjson/document.h"
+#include "include/rapidjson/writer.h"
+#include "include/rapidjson/stringbuffer.h"
+#include "include/rapidjson/istreamwrapper.h"
+#include "include/rapidjson/ostreamwrapper.h"
 #include "Lista.hpp"
+#include <fstream>
+#include <unistd.h>
 
 
 //template <typename T>
+using namespace rapidjson;
 
 class Collector{
     private:
@@ -45,5 +53,7 @@ class Collector{
         void reference(int id);
 
         void garbage();
+
+        void addJsonObj(string espacio,string dato, string id, string ref, string tipo);
 };   
 #endif

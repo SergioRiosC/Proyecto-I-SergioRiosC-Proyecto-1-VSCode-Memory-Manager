@@ -2,6 +2,7 @@
 #include <thread>
 #include "pthread.h"
 #include <chrono>
+#include <sstream>
 //#include "Lista.hpp"
 
 using namespace std;
@@ -24,6 +25,7 @@ Collector *Collector::myCollector(){
         garbageColector = new Collector();
         cout<<"Se inicializo el Garbage\n";
         collector_activado = true;
+
     }
     return garbageColector;
 }
@@ -34,6 +36,18 @@ int Collector::addPtr(int *memEspc){
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
         cout<<"Espacio de memoria " <<memEspc<<"\n";
         cout<<"Referencias a la id " <<referenceCnt <<": " <<1<<"\n";
+        
+        ostringstream la;
+        static_cast<ostringstream&>(la<<memEspc).str();
+        string strEspacio = la.str();
+        
+        stringstream ssM,ssCnt,ssR;
+        ssCnt<<referenceCnt;
+        ssR<<1;
+        ssM<<*memEspc;
+
+        addJsonObj(strEspacio.c_str(),ssM.str().c_str(), ssCnt.str().c_str(), ssR.str().c_str(), "int");
+
         return garbageColector->referenceCnt++;
 }
 
@@ -42,6 +56,20 @@ int Collector::addPtr(double *memEspc){
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
         cout<<"Espacio de memoria " <<memEspc<<"\n";
         cout<<"Referencias a la id " <<referenceCnt <<": " <<1<<"\n";
+        
+        ostringstream la;
+        static_cast<ostringstream&>(la<<memEspc).str();
+        string strEspacio = la.str();
+        
+        stringstream ssM,ssCnt,ssR;
+        ssCnt<<referenceCnt;
+        ssR<<1;
+        ssM<<*memEspc;
+
+        addJsonObj(strEspacio.c_str(),ssM.str().c_str(), ssCnt.str().c_str(), ssR.str().c_str(), "double");
+
+        
+        
         return garbageColector->referenceCnt++;
 }
 
@@ -50,6 +78,18 @@ int Collector::addPtr(float *memEspc){
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
         cout<<"Espacio de memoria " <<memEspc<<"\n";
         cout<<"Referencias a la id " <<referenceCnt <<": " <<1<<"\n";
+        
+        ostringstream la;
+        static_cast<ostringstream&>(la<<memEspc).str();
+        string strEspacio = la.str();
+        
+        stringstream ssM,ssCnt,ssR;
+        ssCnt<<referenceCnt;
+        ssR<<1;
+        ssM<<*memEspc;
+
+        addJsonObj(strEspacio.c_str(),ssM.str().c_str(), ssCnt.str().c_str(), ssR.str().c_str(), "float");
+
         return garbageColector->referenceCnt++;
 }
 
@@ -58,6 +98,18 @@ int Collector::addPtr(long *memEspc){
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
         cout<<"Espacio de memoria " <<memEspc<<"\n";
         cout<<"Referencias a la id " <<referenceCnt <<": " <<1<<"\n";
+        
+        ostringstream la;
+        static_cast<ostringstream&>(la<<memEspc).str();
+        string strEspacio = la.str();
+        
+        stringstream ssM,ssCnt,ssR;
+        ssCnt<<referenceCnt;
+        ssR<<1;
+        ssM<<*memEspc;
+
+        addJsonObj(strEspacio.c_str(),ssM.str().c_str(), ssCnt.str().c_str(), ssR.str().c_str(), "long");
+
         return garbageColector->referenceCnt++;
 }
 
@@ -66,6 +118,18 @@ int Collector::addPtr(char *memEspc){
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
         cout<<"Espacio de memoria " <<memEspc<<"\n";
         cout<<"Referencias a la id " <<referenceCnt <<": " <<1<<"\n";
+        
+        ostringstream la;
+        static_cast<ostringstream&>(la<<memEspc).str();
+        string strEspacio = la.str();
+        
+        stringstream ssM,ssCnt,ssR;
+        ssCnt<<referenceCnt;
+        ssR<<1;
+        ssM<<*memEspc;
+
+        addJsonObj(strEspacio.c_str(),ssM.str().c_str(), ssCnt.str().c_str(), ssR.str().c_str(), "char");
+
         return garbageColector->referenceCnt++;
 }
 
@@ -154,4 +218,45 @@ void Collector::llamador(){
         std::this_thread::sleep_for(std::chrono::seconds(1));        
     }
     
+}
+
+void Collector::addJsonObj(string espacio,string dato, string id, string ref, string tipo ){
+    
+    ifstream url("JSONFiles/prueba.json");
+    IStreamWrapper isw(url);
+    Document doc;
+    doc.ParseStream(isw);
+    
+    Value o(kObjectType);
+    {
+        
+        Value vEspacio;
+        Value vDato;
+        Value vRef;
+        Value vTipo;
+        vEspacio = StringRef(espacio.c_str());
+        vDato = StringRef(dato.c_str());
+        vRef = StringRef(ref.c_str());
+        vTipo = StringRef(tipo.c_str());
+
+        o.AddMember("Dato", vDato, doc.GetAllocator());  // deep clone contacts (may be with lots of allocations)
+        o.AddMember("Tipo de dato", vTipo, doc.GetAllocator());  // deep clone contacts (may be with lots of allocations)
+        o.AddMember("Espacio en memoria", vEspacio, doc.GetAllocator());  // deep clone contacts (may be with lots of allocations)
+        o.AddMember("Referncias", vRef, doc.GetAllocator());  // deep clone contacts (may be with lots of allocations)
+        
+    }
+
+    
+    //Value name;
+    //name = StringRef();
+    doc.AddMember(StringRef(id.c_str()),o,doc.GetAllocator());//Agrega al archivo
+    //int x = 1;
+    /*if(x == 1){
+        if(doc.HasMember("valor"))//***
+           // doc.EraseMember("valor");//Elimina elementos del doc***
+    }*/
+    ofstream ofs2("JSONFiles/prueba.json");
+    OStreamWrapper osw(ofs2);
+    Writer<OStreamWrapper> writer2(osw);
+    doc.Accept(writer2);
 }

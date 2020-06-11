@@ -4,21 +4,19 @@
 #include "include/rapidjson/istreamwrapper.h"
 #include "include/rapidjson/ostreamwrapper.h"*/
 #include "VSPtr.hpp"
-#include <fstream>
-#include <unistd.h>
 
 //using namespace rapidjson;
 using namespace std;
 
 void func(){
-    VSPTR<double> myPtr = VSPTR<double>::New();
+    VSPTR<long> myPtr = VSPTR<long>::New();
     *myPtr = 7;
 
 }
 
 void func2(){
-    VSPTR<char> myPtr = VSPTR<char>::New();
-    *myPtr = 'c';
+    VSPTR<float> myPtr = VSPTR<float>::New();
+    *myPtr = 10;
 
 }
 
@@ -27,10 +25,34 @@ void activar_thread(){
     garbage->llamador();
 
 }
-
+/*int main() {
+    ifstream url("JSONFiles/prueba.json");
+    IStreamWrapper isw(url);
+    Document doc;
+    doc.ParseStream(isw);
+    Value o(kObjectType);
+    {
+        Value j,k;
+        j = "m";
+        k = "n";
+        o.AddMember("yo", j, doc.GetAllocator());  // deep clone contacts (may be with lots of allocations)
+        o.AddMember("el", k, doc.GetAllocator());  // deep clone contacts (may be with lots of allocations)
+        // destruct contacts.
+    }
+    doc.AddMember("contacts",o,doc.GetAllocator());//Agrega al archivo
+    //int x = 1;
+    /*if(x == 1){
+        if(doc.HasMember("valor"))//***
+           // doc.EraseMember("valor");//Elimina elementos del doc***
+    }*/
+    /*ofstream ofs2("JSONFiles/prueba.json");
+    OStreamWrapper osw(ofs2);
+    Writer<OStreamWrapper> writer2(osw);
+    doc.Accept(writer2);
+}*/
 int main() {
     
-
+    //ifstream url("JSONFiles/prueba.json");
     /*int a;
     const char *b = typeid(a).name();
     if(*b == 'i')
