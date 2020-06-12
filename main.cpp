@@ -60,6 +60,7 @@ int main() {
     
     thread thr(activar_thread);
     VSPTR<int> myPtr = VSPTR<int>::New();
+    sleep(3);
     cout << "1\n";
     *myPtr = 5;
     cout << "2\n";

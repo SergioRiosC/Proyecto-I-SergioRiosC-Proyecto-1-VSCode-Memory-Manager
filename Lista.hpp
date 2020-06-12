@@ -1,6 +1,15 @@
 #include<iostream>
+#include "include/rapidjson/document.h"
+#include "include/rapidjson/writer.h"
+#include "include/rapidjson/stringbuffer.h"
+#include "include/rapidjson/istreamwrapper.h"
+#include "include/rapidjson/ostreamwrapper.h"
+#include <fstream>
+#include <unistd.h>
+#include <sstream>
 
 using namespace std;
+using namespace rapidjson;
 
 
 /*class AbsNodo{
@@ -130,16 +139,18 @@ public:
         
     }
 
-    void reference(int id){
+    bool reference(int id){
         Nodo<L> *aux = buscarNodo(id);
         if(aux!=NULL){
 
             aux->agregar_referencia();
             cout << "Referencias a la id " << id <<": " << aux->getReferencias() <<"\n";
-        
-        }else
+            
+            return true;
+        }else{
             cout<<"Desde reference: No se encontro el nodo"<<id<<"\n";
-        
+            return false;
+        }
     }
 
     bool dereference(int id){
@@ -154,6 +165,12 @@ public:
 
             cout << "Referencias a la id " << id <<": " << aux->getReferencias() <<"\n";
             
+            stringstream ssId;
+            stringstream ssR;
+            ssId<<id;
+            ssR <<aux->getReferencias();
+            
+           //modificarJson(ssId.str().c_str(),ssR.str().c_str());
             return true;
         
         }else
@@ -163,7 +180,24 @@ public:
         
     }
 
-    int getReferencias(int id){
+    void modificarRefJson(string id, string referencias){
+        ifstream url("JSONFiles/prueba.json");
+        IStreamWrapper isw(url);
+        Document doc;
+        doc.ParseStream(isw);
+        Value o(kObjectType);
+        //o = doc.FindMember(id.c_str()); 
+        o = doc[id.c_str()];
+        //cout<<o.GetString()<<"\n";
+        Value::MemberIterator ref = o.FindMember("Referncias");
+        ref->value.SetString(referencias.c_str(),doc.GetAllocator());
+        ofstream ofs2("JSONFiles/prueba.json");
+        OStreamWrapper osw(ofs2);
+        Writer<OStreamWrapper> writer2(osw);
+        doc.Accept(writer2);
+    }
+
+    /*int getReferencias(int id){
         Nodo<L> *aux = buscarNodo(id);
         if(aux != NULL){
             return aux->getReferencias();
@@ -172,7 +206,7 @@ public:
             cout<<"No se encontro el nodo"<<id;
             return 0;
         }
-    }
+    }*/
 
     void agregarNodo(L *newDato, int id){
         if(vacia()){
@@ -200,6 +234,21 @@ public:
         delete aux;
 
     }*/
+
+    void delJson(string id){
+        ifstream url("JSONFiles/prueba.json");
+        IStreamWrapper isw(url);
+        Document doc;
+        doc.ParseStream(isw);
+        if(doc.HasMember(id.c_str())){
+            doc.EraseMember(id.c_str());
+        }
+        ofstream ofs2("JSONFiles/prueba.json");
+        OStreamWrapper osw(ofs2);
+        Writer<OStreamWrapper> writer2(osw);
+        doc.Accept(writer2);
+    }
+
     void eliminarNodo(Nodo<L> *nodo){
         cout<<"se intenta borrar ID= "<<nodo->getId()<<"MemEspc= "<<nodo->getMemEspc()<<"\n";
         
@@ -215,6 +264,11 @@ public:
             this->head = NULL;
             this->tail = NULL;
         }
+
+        stringstream ssId;
+        ssId << nodo->getId();
+        //delJson(ssId.str().c_str());
+
         //aux->ant->sig = aux->sig;
         //aux->sig->ant = aux->ant;
         delete nodo->getMemEspc();

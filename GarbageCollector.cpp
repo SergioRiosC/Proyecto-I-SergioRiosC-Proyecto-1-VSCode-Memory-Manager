@@ -2,7 +2,6 @@
 #include <thread>
 #include "pthread.h"
 #include <chrono>
-#include <sstream>
 //#include "Lista.hpp"
 
 using namespace std;
@@ -15,19 +14,35 @@ Collector::Collector(){
     garbageColector = NULL;
 }
 
+
 Collector::~Collector(){
     cout<<"Se dejó de llamar al GarbageCollector";
     collector_activado = false;
 }
+
 
 Collector *Collector::myCollector(){
     if(garbageColector == NULL){
         garbageColector = new Collector();
         cout<<"Se inicializo el Garbage\n";
         collector_activado = true;
+        vaciarJson();
 
     }
     return garbageColector;
+}
+
+
+void Collector::vaciarJson(){
+    ifstream url("JSONFiles/prueba.json");
+    IStreamWrapper isw(url);
+    Document doc;
+    doc.ParseStream(isw);
+    doc.RemoveAllMembers();
+    ofstream ofs2("JSONFiles/prueba.json");
+    OStreamWrapper osw(ofs2);
+    Writer<OStreamWrapper> writer2(osw);
+    doc.Accept(writer2);
 }
 
 
@@ -45,11 +60,14 @@ int Collector::addPtr(int *memEspc){
         ssCnt<<referenceCnt;
         ssR<<1;
         ssM<<*memEspc;
+        cout<<"Desde add "<< memEspc<<"\n";
+        cout<<"Desde add "<< *memEspc<<"\n";
 
         addJsonObj(strEspacio.c_str(),ssM.str().c_str(), ssCnt.str().c_str(), ssR.str().c_str(), "int");
-
+        
         return garbageColector->referenceCnt++;
 }
+
 
 int Collector::addPtr(double *memEspc){
         garbageColector->listaD->agregarNodo(memEspc,referenceCnt);
@@ -94,6 +112,7 @@ int Collector::addPtr(float *memEspc){
 }
 
 int Collector::addPtr(long *memEspc){
+
         garbageColector->listaL->agregarNodo(memEspc,referenceCnt);
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
         cout<<"Espacio de memoria " <<memEspc<<"\n";
@@ -155,11 +174,16 @@ void Collector::dereference(int id){
 void Collector::reference(int id){
     if (id != -1)
     {
-        garbageColector->lista->reference(id);
-        garbageColector->listaD->reference(id);
-        /*garbageColector->listaF->reference(id);
-        garbageColector->listaL->reference(id);
-        garbageColector->listaC->reference(id);*/
+        if(garbageColector->lista->reference(id))
+            return;
+        else if(garbageColector->listaD->reference(id))
+            return;
+        else if(garbageColector->listaF->reference(id))
+            return;
+        else if(garbageColector->listaL->reference(id))
+            return;
+        else if(garbageColector->listaC->reference(id))
+            return;
     } 
 }
 
@@ -220,13 +244,14 @@ void Collector::llamador(){
     
 }
 
+
+
 void Collector::addJsonObj(string espacio,string dato, string id, string ref, string tipo ){
     
     ifstream url("JSONFiles/prueba.json");
     IStreamWrapper isw(url);
     Document doc;
     doc.ParseStream(isw);
-    
     Value o(kObjectType);
     {
         
@@ -249,6 +274,7 @@ void Collector::addJsonObj(string espacio,string dato, string id, string ref, st
     
     //Value name;
     //name = StringRef();
+    //doc.RemoveAllMembers();
     doc.AddMember(StringRef(id.c_str()),o,doc.GetAllocator());//Agrega al archivo
     //int x = 1;
     /*if(x == 1){
