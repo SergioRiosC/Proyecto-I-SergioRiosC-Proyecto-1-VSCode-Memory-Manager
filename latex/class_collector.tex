@@ -1,0 +1,325 @@
+\hypertarget{class_collector}{}\doxysection{Collector Class Reference}
+\label{class_collector}\index{Collector@{Collector}}
+
+
+Clase que inicializa el garbage collector, este gestiona la memoria que usara el programador.  
+
+
+
+
+{\ttfamily \#include $<$Garbage\+Collector.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_collector_ad60b06491094b8fddf25502cf162cdf6}{Collector}} ()
+\begin{DoxyCompactList}\small\item\em Constructor del garbage collector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_collector_a721d622ac394ad293cfdd2231ead25ff}{$\sim$\+Collector}} ()
+\begin{DoxyCompactList}\small\item\em Destructor del Garbage collector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_collector_a72f6ae0b1cc832beb629e0395d6af65b}{llamador}} ()
+\begin{DoxyCompactList}\small\item\em Funcion encargada de llamar al garbage collector cada segundo. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_collector_a2d1dafd273189838d1038619bbca4068}{add\+Ptr}} (int $\ast$mem\+Espc)
+\begin{DoxyCompactList}\small\item\em Agrega un dato de tipo int a la lista de referencias del Garbage \mbox{\hyperlink{class_collector}{Collector}} y le nasigna un espacio de memoria. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_collector_a3b4ea4df530eb433e75bd767cdb75457}{add\+Ptr}} (double $\ast$mem\+Espc)
+\begin{DoxyCompactList}\small\item\em Agrega un dato de tipo double a la lista de referencias del Garbage \mbox{\hyperlink{class_collector}{Collector}} y le nasigna un espacio de memoria. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_collector_a7c8ba7f8db9e8e54ace2159e7d8adf9e}{add\+Ptr}} (float $\ast$mem\+Espc)
+\begin{DoxyCompactList}\small\item\em Agrega un dato de tipo float a la lista de referencias del Garbage \mbox{\hyperlink{class_collector}{Collector}} y le nasigna un espacio de memoria. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_collector_ab8c8006e3c60c60f124e1175af1f01bd}{add\+Ptr}} (long $\ast$mem\+Espc)
+\begin{DoxyCompactList}\small\item\em Agrega un dato de tipo long a la lista de referencias del Garbage \mbox{\hyperlink{class_collector}{Collector}} y le nasigna un espacio de memoria. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_collector_a427c0a02ca033ecc216743bf4c699d9f}{add\+Ptr}} (char $\ast$mem\+Espc)
+\begin{DoxyCompactList}\small\item\em Agrega un dato de tipo char a la lista de referencias del Garbage \mbox{\hyperlink{class_collector}{Collector}} y le nasigna un espacio de memoria. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_collector_a43a468a2621939c6b8adbe2af1205ed4}{dereference}} (int id)
+\begin{DoxyCompactList}\small\item\em Busca el V\+S\+PR en las listas y le decrementa la referencia. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_collector_a94a3d50bfad610d871e34e8dfd6287fe}{reference}} (int id)
+\begin{DoxyCompactList}\small\item\em Busca el \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} en las listas y le incrementa la referencia. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_collector_a89974d74d659ba47818b4e6de3075cf1}{garbage}} ()
+\begin{DoxyCompactList}\small\item\em Busca en todos los nodos datos que no tengan referencia y los elimina. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_collector_a1c8e78e8ea69700158631e35f286711f}{add\+Json\+Obj}} (string espacio, string dato, string id, string ref, string tipo)
+\begin{DoxyCompactList}\small\item\em Funcion encargada de crear el J\+S\+ON con los datos de los \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_collector_ab0e1cec8e04b8e693380c2a3c9ae9c8f}\label{class_collector_ab0e1cec8e04b8e693380c2a3c9ae9c8f}} 
+void {\bfseries modificar\+Json} (string id, string referencias)
+\item 
+\mbox{\Hypertarget{class_collector_a2d1d4cde4bbab3fa0af1075937e6da98}\label{class_collector_a2d1d4cde4bbab3fa0af1075937e6da98}} 
+void {\bfseries del\+Json} (string id)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_collector}{Collector}} $\ast$ \mbox{\hyperlink{class_collector_af21b000b2f7d690d8c4a75cd737ccf39}{my\+Collector}} ()
+\begin{DoxyCompactList}\small\item\em Inicializa el Garbage \mbox{\hyperlink{class_collector}{Collector}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_collector_a2113e4bd9344c5c2d3889456d20d1dbd}\label{class_collector_a2113e4bd9344c5c2d3889456d20d1dbd}} 
+static void \mbox{\hyperlink{class_collector_a2113e4bd9344c5c2d3889456d20d1dbd}{vaciar\+Json}} ()
+\begin{DoxyCompactList}\small\item\em Funcion para vaciar el archivo J\+S\+ON. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_collector_a12e283530ea4f966fdd5614fa2b2b285}\label{class_collector_a12e283530ea4f966fdd5614fa2b2b285}} 
+\mbox{\hyperlink{class_lista}{Lista}}$<$ int $>$ $\ast$ {\bfseries lista} = new \mbox{\hyperlink{class_lista}{Lista}}$<$int$>$()
+\item 
+\mbox{\Hypertarget{class_collector_ad74a4f31a53c98327ae6189409d44e61}\label{class_collector_ad74a4f31a53c98327ae6189409d44e61}} 
+\mbox{\hyperlink{class_lista}{Lista}}$<$ double $>$ $\ast$ {\bfseries listaD} = new \mbox{\hyperlink{class_lista}{Lista}}$<$double$>$()
+\item 
+\mbox{\Hypertarget{class_collector_a6bd1fa02da237c22049d7a78f3e45d29}\label{class_collector_a6bd1fa02da237c22049d7a78f3e45d29}} 
+\mbox{\hyperlink{class_lista}{Lista}}$<$ long $>$ $\ast$ {\bfseries listaL} = new \mbox{\hyperlink{class_lista}{Lista}}$<$long$>$()
+\item 
+\mbox{\Hypertarget{class_collector_a8d55a68ddf05cb6fe442e004a8141fc3}\label{class_collector_a8d55a68ddf05cb6fe442e004a8141fc3}} 
+\mbox{\hyperlink{class_lista}{Lista}}$<$ float $>$ $\ast$ {\bfseries listaF} = new \mbox{\hyperlink{class_lista}{Lista}}$<$float$>$()
+\item 
+\mbox{\Hypertarget{class_collector_aae638732ee9e80aecc7954fa71913204}\label{class_collector_aae638732ee9e80aecc7954fa71913204}} 
+\mbox{\hyperlink{class_lista}{Lista}}$<$ char $>$ $\ast$ {\bfseries listaC} = new \mbox{\hyperlink{class_lista}{Lista}}$<$char$>$()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_collector_a4737931f053d8ee482a7a25041a83755}\label{class_collector_a4737931f053d8ee482a7a25041a83755}} 
+static bool {\bfseries collector\+\_\+activado} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Clase que inicializa el garbage collector, este gestiona la memoria que usara el programador. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_collector_ad60b06491094b8fddf25502cf162cdf6}\label{class_collector_ad60b06491094b8fddf25502cf162cdf6}} 
+\index{Collector@{Collector}!Collector@{Collector}}
+\index{Collector@{Collector}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{Collector()}{Collector()}}
+{\footnotesize\ttfamily Collector\+::\+Collector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor del garbage collector. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{class_collector_a721d622ac394ad293cfdd2231ead25ff}\label{class_collector_a721d622ac394ad293cfdd2231ead25ff}} 
+\index{Collector@{Collector}!````~Collector@{$\sim$Collector}}
+\index{````~Collector@{$\sim$Collector}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{$\sim$Collector()}{~Collector()}}
+{\footnotesize\ttfamily Collector\+::$\sim$\+Collector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor del Garbage collector. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_collector_a1c8e78e8ea69700158631e35f286711f}\label{class_collector_a1c8e78e8ea69700158631e35f286711f}} 
+\index{Collector@{Collector}!addJsonObj@{addJsonObj}}
+\index{addJsonObj@{addJsonObj}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{addJsonObj()}{addJsonObj()}}
+{\footnotesize\ttfamily void Collector\+::add\+Json\+Obj (\begin{DoxyParamCaption}\item[{string}]{espacio,  }\item[{string}]{dato,  }\item[{string}]{id,  }\item[{string}]{ref,  }\item[{string}]{tipo }\end{DoxyParamCaption})}
+
+
+
+Funcion encargada de crear el J\+S\+ON con los datos de los \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em espacio} & Espacio de memoria del dato a almacenar en J\+S\+ON \\
+\hline
+{\em dato} & Dato a guardar en el J\+S\+ON \\
+\hline
+{\em id} & Id del \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} a almacenar en J\+S\+ON \\
+\hline
+{\em ref} & Numero de referencias del dato a guardar \\
+\hline
+{\em tipo} & Tipo de dato a guardar \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_collector_a427c0a02ca033ecc216743bf4c699d9f}\label{class_collector_a427c0a02ca033ecc216743bf4c699d9f}} 
+\index{Collector@{Collector}!addPtr@{addPtr}}
+\index{addPtr@{addPtr}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{addPtr()}{addPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily int Collector\+::add\+Ptr (\begin{DoxyParamCaption}\item[{char $\ast$}]{mem\+Espc }\end{DoxyParamCaption})}
+
+
+
+Agrega un dato de tipo char a la lista de referencias del Garbage \mbox{\hyperlink{class_collector}{Collector}} y le nasigna un espacio de memoria. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em mem\+Espc} & Puntero hacia el dato del \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+id del \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collector_a3b4ea4df530eb433e75bd767cdb75457}\label{class_collector_a3b4ea4df530eb433e75bd767cdb75457}} 
+\index{Collector@{Collector}!addPtr@{addPtr}}
+\index{addPtr@{addPtr}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{addPtr()}{addPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily int Collector\+::add\+Ptr (\begin{DoxyParamCaption}\item[{double $\ast$}]{mem\+Espc }\end{DoxyParamCaption})}
+
+
+
+Agrega un dato de tipo double a la lista de referencias del Garbage \mbox{\hyperlink{class_collector}{Collector}} y le nasigna un espacio de memoria. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em mem\+Espc} & Puntero hacia el dato del \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+id del \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collector_a7c8ba7f8db9e8e54ace2159e7d8adf9e}\label{class_collector_a7c8ba7f8db9e8e54ace2159e7d8adf9e}} 
+\index{Collector@{Collector}!addPtr@{addPtr}}
+\index{addPtr@{addPtr}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{addPtr()}{addPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily int Collector\+::add\+Ptr (\begin{DoxyParamCaption}\item[{float $\ast$}]{mem\+Espc }\end{DoxyParamCaption})}
+
+
+
+Agrega un dato de tipo float a la lista de referencias del Garbage \mbox{\hyperlink{class_collector}{Collector}} y le nasigna un espacio de memoria. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em mem\+Espc} & Puntero hacia el dato del \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+id del \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collector_a2d1dafd273189838d1038619bbca4068}\label{class_collector_a2d1dafd273189838d1038619bbca4068}} 
+\index{Collector@{Collector}!addPtr@{addPtr}}
+\index{addPtr@{addPtr}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{addPtr()}{addPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily int Collector\+::add\+Ptr (\begin{DoxyParamCaption}\item[{int $\ast$}]{mem\+Espc }\end{DoxyParamCaption})}
+
+
+
+Agrega un dato de tipo int a la lista de referencias del Garbage \mbox{\hyperlink{class_collector}{Collector}} y le nasigna un espacio de memoria. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em mem\+Espc} & Puntero hacia el dato del \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+id del \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collector_ab8c8006e3c60c60f124e1175af1f01bd}\label{class_collector_ab8c8006e3c60c60f124e1175af1f01bd}} 
+\index{Collector@{Collector}!addPtr@{addPtr}}
+\index{addPtr@{addPtr}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{addPtr()}{addPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily int Collector\+::add\+Ptr (\begin{DoxyParamCaption}\item[{long $\ast$}]{mem\+Espc }\end{DoxyParamCaption})}
+
+
+
+Agrega un dato de tipo long a la lista de referencias del Garbage \mbox{\hyperlink{class_collector}{Collector}} y le nasigna un espacio de memoria. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em mem\+Espc} & Puntero hacia el dato del \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+id del \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collector_a43a468a2621939c6b8adbe2af1205ed4}\label{class_collector_a43a468a2621939c6b8adbe2af1205ed4}} 
+\index{Collector@{Collector}!dereference@{dereference}}
+\index{dereference@{dereference}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{dereference()}{dereference()}}
+{\footnotesize\ttfamily void Collector\+::dereference (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Busca el V\+S\+PR en las listas y le decrementa la referencia. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Identificador de un \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{class_collector_a89974d74d659ba47818b4e6de3075cf1}\label{class_collector_a89974d74d659ba47818b4e6de3075cf1}} 
+\index{Collector@{Collector}!garbage@{garbage}}
+\index{garbage@{garbage}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{garbage()}{garbage()}}
+{\footnotesize\ttfamily void Collector\+::garbage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Busca en todos los nodos datos que no tengan referencia y los elimina. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{class_collector_a72f6ae0b1cc832beb629e0395d6af65b}\label{class_collector_a72f6ae0b1cc832beb629e0395d6af65b}} 
+\index{Collector@{Collector}!llamador@{llamador}}
+\index{llamador@{llamador}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{llamador()}{llamador()}}
+{\footnotesize\ttfamily void Collector\+::llamador (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Funcion encargada de llamar al garbage collector cada segundo. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{class_collector_af21b000b2f7d690d8c4a75cd737ccf39}\label{class_collector_af21b000b2f7d690d8c4a75cd737ccf39}} 
+\index{Collector@{Collector}!myCollector@{myCollector}}
+\index{myCollector@{myCollector}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{myCollector()}{myCollector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_collector}{Collector}} $\ast$ Collector\+::my\+Collector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Inicializa el Garbage \mbox{\hyperlink{class_collector}{Collector}}. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{class_collector_a94a3d50bfad610d871e34e8dfd6287fe}\label{class_collector_a94a3d50bfad610d871e34e8dfd6287fe}} 
+\index{Collector@{Collector}!reference@{reference}}
+\index{reference@{reference}!Collector@{Collector}}
+\doxysubsubsection{\texorpdfstring{reference()}{reference()}}
+{\footnotesize\ttfamily void Collector\+::reference (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Busca el \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} en las listas y le incrementa la referencia. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Identificador de un \mbox{\hyperlink{class_v_s_p_t_r}{V\+S\+P\+TR}} \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Garbage\+Collector.\+hpp\item 
+Garbage\+Collector.\+cpp\end{DoxyCompactItemize}
