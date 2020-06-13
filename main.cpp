@@ -1,9 +1,7 @@
-/*#include "include/rapidjson/document.h"
-#include "include/rapidjson/writer.h"
-#include "include/rapidjson/stringbuffer.h"
-#include "include/rapidjson/istreamwrapper.h"
-#include "include/rapidjson/ostreamwrapper.h"*/
+
 #include "VSPtr.hpp"
+#include "Cliente.cpp"
+//#include "GarbageCollector.hpp"
 
 //using namespace rapidjson;
 using namespace std;
@@ -57,10 +55,19 @@ int main() {
     const char *b = typeid(a).name();
     if(*b == 'i')
         cout<<"entero";*/
-    
+    string resp;
+    bool b;
+    cout<<"Desea  usar memoria local?\n Si=1\n No=0\n >"<<endl;
+    while ((true)){
+        getline(cin,resp);
+        if(resp=="1"){
+            b=true;
+            break;
+        }else{b=false;break;}
+    }
+    if(b){
     thread thr(activar_thread);
     VSPTR<int> myPtr = VSPTR<int>::New();
-    sleep(3);
     cout << "1\n";
     *myPtr = 5;
     cout << "2\n";
@@ -74,6 +81,12 @@ int main() {
     func2();
     sleep(4);
     cout<<&myPtr;
-    thr.join();
+    
+    thr.join();}
+    else
+    {
+        MCliente();
+    }
+    
     //cout<<"hola";
 }

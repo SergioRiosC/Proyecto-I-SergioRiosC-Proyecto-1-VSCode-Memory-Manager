@@ -1,0 +1,265 @@
+\hypertarget{class_nodo}{}\doxysection{Nodo$<$ N $>$ Class Template Reference}
+\label{class_nodo}\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+
+
+Classe que contiene las listas enlazadas segun los tipos de datos.  
+
+
+
+
+{\ttfamily \#include $<$Lista.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_nodo_a1118889f0c2ff12442dd40acfa056e40}{Nodo}} (N $\ast$new\+Dato, int id)
+\begin{DoxyCompactList}\small\item\em Constructor de los nodos. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_nodo_a48199b266084e013f7c9dc88a999b079}{agregar\+\_\+referencia}} ()
+\begin{DoxyCompactList}\small\item\em Funcion para sumar las referencias del dato. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_nodo_abd34ba65cd1ad2bf539be2104a304a75}{quitar\+\_\+referencia}} ()
+\begin{DoxyCompactList}\small\item\em Funcion para resta las referencias del dato. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_nodo_a077d7b30afe68c37befc5c3237b17a32}{get\+Referencias}} ()
+\begin{DoxyCompactList}\small\item\em Funcion para obtener las referencias del dato. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_nodo_aa048d6375fd834c7e6472663a283904d}{set\+Referenecias}} (int new\+Ref)
+\begin{DoxyCompactList}\small\item\em Funcion para establecer las referencias del dato. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_nodo_a222644fd8fef46846e6d00f8915c427e}{set\+Sig}} (\mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$ $\ast$setter)
+\begin{DoxyCompactList}\small\item\em Funcion para establecer el nodo siguiente. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$ $\ast$ \mbox{\hyperlink{class_nodo_a12d0409d369a9a239aaaf5dc1d7c0e58}{get\+Sig}} ()
+\begin{DoxyCompactList}\small\item\em Funcion para obtener el nodo siguiente. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_nodo_ac7a224b5b6ba1857a4a8371181dbd04a}{set\+Ant}} (\mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$ $\ast$setter)
+\begin{DoxyCompactList}\small\item\em Funcion para asignar el siguiente nodo a otro nodo. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$ $\ast$ \mbox{\hyperlink{class_nodo_ab0ea26aab01d6393ddb8b36b9785144c}{get\+Ant}} ()
+\begin{DoxyCompactList}\small\item\em Funcion para obtener el nodo anterior. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_nodo_a266eb37e89e1c7e5d263e5b86e4433d3}{get\+Id}} ()
+\begin{DoxyCompactList}\small\item\em Funcion para obtener el id del dato. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_nodo_aed1fbfd599f31601ab974f3b3c91de82}{set\+Id}} (int id)
+\begin{DoxyCompactList}\small\item\em Funcion para asignar el id al dato. \end{DoxyCompactList}\item 
+N $\ast$ \mbox{\hyperlink{class_nodo_a356d5f1d14fe18747d02638cbf4de272}{get\+Mem\+Espc}} ()
+\begin{DoxyCompactList}\small\item\em Funcion para obtener el espacio en memoria del dato. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename N$>$\newline
+class Nodo$<$ N $>$}
+
+Classe que contiene las listas enlazadas segun los tipos de datos. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_nodo_a1118889f0c2ff12442dd40acfa056e40}\label{class_nodo_a1118889f0c2ff12442dd40acfa056e40}} 
+\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}!Nodo@{Nodo}}
+\index{Nodo@{Nodo}!Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{Nodo()}{Nodo()}}
+{\footnotesize\ttfamily template$<$typename N $>$ \\
+\mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$\+::\mbox{\hyperlink{class_nodo}{Nodo}} (\begin{DoxyParamCaption}\item[{N $\ast$}]{new\+Dato,  }\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor de los nodos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Dato} & Espacio de memoria del dato \\
+\hline
+{\em id} & Identificador del dato \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_nodo_a48199b266084e013f7c9dc88a999b079}\label{class_nodo_a48199b266084e013f7c9dc88a999b079}} 
+\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}!agregar\_referencia@{agregar\_referencia}}
+\index{agregar\_referencia@{agregar\_referencia}!Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{agregar\_referencia()}{agregar\_referencia()}}
+{\footnotesize\ttfamily template$<$typename N $>$ \\
+void \mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$\+::agregar\+\_\+referencia (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para sumar las referencias del dato. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{class_nodo_ab0ea26aab01d6393ddb8b36b9785144c}\label{class_nodo_ab0ea26aab01d6393ddb8b36b9785144c}} 
+\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}!getAnt@{getAnt}}
+\index{getAnt@{getAnt}!Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{getAnt()}{getAnt()}}
+{\footnotesize\ttfamily template$<$typename N $>$ \\
+\mbox{\hyperlink{class_nodo}{Nodo}}$<$N$>$$\ast$ \mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$\+::get\+Ant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para obtener el nodo anterior. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_nodo}{Nodo}} anterior 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_nodo_a266eb37e89e1c7e5d263e5b86e4433d3}\label{class_nodo_a266eb37e89e1c7e5d263e5b86e4433d3}} 
+\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}!getId@{getId}}
+\index{getId@{getId}!Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily template$<$typename N $>$ \\
+int \mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$\+::get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para obtener el id del dato. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+id del dato 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_nodo_a356d5f1d14fe18747d02638cbf4de272}\label{class_nodo_a356d5f1d14fe18747d02638cbf4de272}} 
+\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}!getMemEspc@{getMemEspc}}
+\index{getMemEspc@{getMemEspc}!Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{getMemEspc()}{getMemEspc()}}
+{\footnotesize\ttfamily template$<$typename N $>$ \\
+N$\ast$ \mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$\+::get\+Mem\+Espc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para obtener el espacio en memoria del dato. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+espacio en menoria del dato 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_nodo_a077d7b30afe68c37befc5c3237b17a32}\label{class_nodo_a077d7b30afe68c37befc5c3237b17a32}} 
+\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}!getReferencias@{getReferencias}}
+\index{getReferencias@{getReferencias}!Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{getReferencias()}{getReferencias()}}
+{\footnotesize\ttfamily template$<$typename N $>$ \\
+int \mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$\+::get\+Referencias (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para obtener las referencias del dato. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+referencias del dato 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_nodo_a12d0409d369a9a239aaaf5dc1d7c0e58}\label{class_nodo_a12d0409d369a9a239aaaf5dc1d7c0e58}} 
+\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}!getSig@{getSig}}
+\index{getSig@{getSig}!Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{getSig()}{getSig()}}
+{\footnotesize\ttfamily template$<$typename N $>$ \\
+\mbox{\hyperlink{class_nodo}{Nodo}}$<$N$>$$\ast$ \mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$\+::get\+Sig (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para obtener el nodo siguiente. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+nodo siguiente 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_nodo_abd34ba65cd1ad2bf539be2104a304a75}\label{class_nodo_abd34ba65cd1ad2bf539be2104a304a75}} 
+\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}!quitar\_referencia@{quitar\_referencia}}
+\index{quitar\_referencia@{quitar\_referencia}!Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{quitar\_referencia()}{quitar\_referencia()}}
+{\footnotesize\ttfamily template$<$typename N $>$ \\
+void \mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$\+::quitar\+\_\+referencia (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para resta las referencias del dato. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{class_nodo_ac7a224b5b6ba1857a4a8371181dbd04a}\label{class_nodo_ac7a224b5b6ba1857a4a8371181dbd04a}} 
+\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}!setAnt@{setAnt}}
+\index{setAnt@{setAnt}!Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{setAnt()}{setAnt()}}
+{\footnotesize\ttfamily template$<$typename N $>$ \\
+void \mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$\+::set\+Ant (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$ $\ast$}]{setter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para asignar el siguiente nodo a otro nodo. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em setter} & nodo a asignar siguiente \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_nodo_aed1fbfd599f31601ab974f3b3c91de82}\label{class_nodo_aed1fbfd599f31601ab974f3b3c91de82}} 
+\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}!setId@{setId}}
+\index{setId@{setId}!Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{setId()}{setId()}}
+{\footnotesize\ttfamily template$<$typename N $>$ \\
+void \mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$\+::set\+Id (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para asignar el id al dato. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & id a asignar \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_nodo_aa048d6375fd834c7e6472663a283904d}\label{class_nodo_aa048d6375fd834c7e6472663a283904d}} 
+\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}!setReferenecias@{setReferenecias}}
+\index{setReferenecias@{setReferenecias}!Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{setReferenecias()}{setReferenecias()}}
+{\footnotesize\ttfamily template$<$typename N $>$ \\
+void \mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$\+::set\+Referenecias (\begin{DoxyParamCaption}\item[{int}]{new\+Ref }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para establecer las referencias del dato. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{class_nodo_a222644fd8fef46846e6d00f8915c427e}\label{class_nodo_a222644fd8fef46846e6d00f8915c427e}} 
+\index{Nodo$<$ N $>$@{Nodo$<$ N $>$}!setSig@{setSig}}
+\index{setSig@{setSig}!Nodo$<$ N $>$@{Nodo$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{setSig()}{setSig()}}
+{\footnotesize\ttfamily template$<$typename N $>$ \\
+void \mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$\+::set\+Sig (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_nodo}{Nodo}}$<$ N $>$ $\ast$}]{setter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para establecer el nodo siguiente. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em setter} & \mbox{\hyperlink{class_nodo}{Nodo}} al agregar el siguiente \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Lista.\+hpp\end{DoxyCompactItemize}

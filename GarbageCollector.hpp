@@ -1,12 +1,14 @@
 #ifndef GARBAGECOLLECTOR_H
 #define GARBAGECOLLECTOR_H
-
 #include "Lista.hpp"
 
 
 //template <typename T>
 using namespace rapidjson;
-
+/**
+ * @brief Clase que inicializa el garbage collector, este gestiona la memoria que usara el programador
+ * @author Mat
+ * */
 class Collector{
     private:
         // primer espacio memEspc, segundo espacio
@@ -45,15 +47,12 @@ class Collector{
 
         void reference(int id);
 
-        void garbage();
-
-        void addJsonObj(string espacio,string dato, string id, string ref, string tipo);
+        void garbage();void addJsonObj(string espacio,string dato, string id, string ref, string tipo);
 
         static void vaciarJson();
 
         void modificarJson(string id, string referencias);
 
         void delJson(string id);
-
 };   
 #endif

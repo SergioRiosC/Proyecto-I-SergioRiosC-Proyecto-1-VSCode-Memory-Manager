@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include "include/rapidjson/document.h"
 #include "include/rapidjson/writer.h"
@@ -12,14 +13,11 @@ using namespace std;
 using namespace rapidjson;
 
 
-/*class AbsNodo{
-    private:
-        int id;
-        int referencias;
-};*/
-
-
 template <typename N>
+/**
+ * @brief Classe que contiene las listas enlazadas segun los tipos de datos
+ * @author Mat
+ * */
 class Nodo{
     //friend class Lista<N>;
 private:
@@ -29,7 +27,12 @@ private:
     Nodo *sig;
     Nodo *ant;
 public:
-
+    /**
+     * @brief Constructor de los nodos
+     * @param newDato Espacio de memoria del dato 
+     * @param id Identificador del dato
+     * @author Mat
+*/
     Nodo(N *newDato, int id){
         this->memEspc = newDato; 
         this->id = id;
@@ -38,46 +41,90 @@ public:
         this->ant = NULL;
         cout<<"Desde Nodo(): dato = "<<*newDato<<" memEspc = "<<newDato<<"\n";
     };
-
+/**
+ * @brief Funcion para sumar las referencias del dato
+ * @author Mat
+ * */
     void agregar_referencia(){
         this->referencias++;
     }
-
+/**
+ * @brief Funcion para resta las referencias del dato
+ * @author Mat
+ * */
     void quitar_referencia(){
         this->referencias--;
     }
 
+/**
+ * @brief Funcion para obtener las referencias del dato
+ * @author Mat
+ * @return referencias del dato
+ * */
     int getReferencias(){
         return referencias;
     }
-
+/**
+ * @brief Funcion para establecer las referencias del dato
+ * @author Mat
+ * */
     void setReferenecias(int newRef){
         this->referencias = newRef;
     }
-
+/**
+ * @brief Funcion para establecer el nodo siguiente 
+ * @author Mat
+ * @param setter Nodo al agregar el siguiente
+ * */
     void setSig(Nodo<N> *setter){
         this->sig = setter;
     }
-
+/**
+ * @brief Funcion para obtener el nodo siguiente
+ * @author Mat
+ * @return nodo siguiente
+ * */
     Nodo<N> *getSig(){
         return this->sig;
     }
-
+/**
+ * @brief Funcion para  asignar el siguiente nodo a otro nodo
+ * @author Mat
+ * @param setter nodo a asignar siguiente
+ * */
     void setAnt(Nodo<N> *setter){
         this->ant = setter;
     }
-
+/**
+ * @brief Funcion para obtener el nodo anterior
+ * @author Mat
+ * @return Nodo anterior
+ * */
     Nodo<N> *getAnt(){
         return this->ant;
     }
-
+/**
+ * @brief Funcion para obtener el id del dato
+ * @author Mat
+ * @return id del dato
+ * */
     int getId(){
         return this->id;
     }
-
+/**
+ * @brief Funcion para asignar el id al dato
+ * @author Mat
+ * @param id id a asignar
+ * */
     void setId(int id){
         this->id = id;
     }
+   
+   /**
+ * @brief Funcion para obtener el espacio en memoria del dato
+ * @author Mat
+ * @return espacio en menoria del dato
+ * */
     N *getMemEspc(){
         return this->memEspc;
     }
@@ -88,24 +135,37 @@ public:
 
 
 template <typename L>
+/**
+ * @brief Clase que contiene la lista enlazada de los datos
+ * @author Mat
+ * */
 class Lista{
 private:
     Nodo<L> *head;
     Nodo<L> *tail;
     
 public:
+/**
+ * @brief constructor de la lista
+ * @author Mat
+ * */
     Lista(){
         head = NULL;
         tail = NULL;
     };
-    /*static Lista<L> New(){
-        return *Lista<L>();
-    };*/
-
+/**
+ * @brief Funcion para obtener la cabeza de la lista
+ * @author Mat
+ * @return cabeza de la lista
+ * */
     Nodo<L> *getHead(){
         return this->head;
     }
-
+/**
+ * @brief Funcion para saber si la lista esta vacia
+ * @author Mat
+ * @return true si esta vacia. False si no lo esta
+ * */
     bool vacia(){
         if(this->head == NULL && this->tail == NULL){
             return true;
@@ -115,6 +175,13 @@ public:
         }
         
     }
+    
+    /**
+ * @brief Funcion para encontrar un nodo especifico
+ * @author Mat
+ * @param id id del nodo
+ * @return nodo buscado
+ * */
     Nodo<L> *buscarNodo(int id){
         if(this->head == NULL){
             return NULL;
@@ -139,6 +206,12 @@ public:
         
     }
 
+/**
+ * @brief Funcion para agregar referencias a un dato 
+ * @author Mat
+ * @param id id del nodo al que se le agregan las referencias
+ * @return true si ecuentra el nodo. False si no lo encuentra
+ * */
     bool reference(int id){
         Nodo<L> *aux = buscarNodo(id);
         if(aux!=NULL){
@@ -153,6 +226,13 @@ public:
         }
     }
 
+/**
+ * @brief Funcion para quitar referencias a un dato 
+ * @author Mat
+ * @param id id del nodo que contiene el dato a dereferenciar
+ * @return true si encuentra el nodo. False si no lo encuentra
+ *
+ * */
     bool dereference(int id){
         cout<<"Desde dereference: llamando buscador\n";
         Nodo<L> *aux = buscarNodo(id);
@@ -180,6 +260,12 @@ public:
         
     }
 
+/**
+ * @brief Funcion para agregar datos al archivo JSON 
+ * @author Mat
+ * @param id id del dato a agregar
+ * @param referencias cantidad de referencias del dato
+ * */
     void modificarRefJson(string id, string referencias){
         ifstream url("JSONFiles/prueba.json");
         IStreamWrapper isw(url);
@@ -197,17 +283,12 @@ public:
         doc.Accept(writer2);
     }
 
-    /*int getReferencias(int id){
-        Nodo<L> *aux = buscarNodo(id);
-        if(aux != NULL){
-            return aux->getReferencias();
-        }else
-        {
-            cout<<"No se encontro el nodo"<<id;
-            return 0;
-        }
-    }*/
-
+/**
+ * @brief Funcion para agregar un nodo a la lista
+ * @author Mat
+ * @param newDato dato a agregar
+ * @param id id del dato a agregar
+ * */
     void agregarNodo(L *newDato, int id){
         if(vacia()){
            Nodo<L> * newPtr = new Nodo<L>(newDato, id); //creates new node
@@ -222,19 +303,12 @@ public:
         }
     }
 
-    /*void eliminarNodo(int id){
-        cout<<"se intenta borrar "<<id<<"\n";
-        Nodo<L> *aux = buscarNodo(id);
-        if(aux->getAnt() != NULL)
-            aux->getAnt()->setSig(aux->getSig());
-        if(aux->getSig() != NULL)
-            aux->getSig()->setAnt(aux->getAnt());
-        //aux->ant->sig = aux->sig;
-        //aux->sig->ant = aux->ant;
-        delete aux;
-
-    }*/
-
+ 
+/**
+ * @brief Funcion para eliminar contenido del archivo JSON
+ * @author Mat
+ * @param id id del dato a eliminar
+ * */
     void delJson(string id){
         ifstream url("JSONFiles/prueba.json");
         IStreamWrapper isw(url);
@@ -249,6 +323,11 @@ public:
         doc.Accept(writer2);
     }
 
+/**
+ * @brief Funcion para eliminar algun nodo de la  lista
+ * @author Mat
+ * @param nodo Nodo a eliminar
+ * */
     void eliminarNodo(Nodo<L> *nodo){
         cout<<"se intenta borrar ID= "<<nodo->getId()<<"MemEspc= "<<nodo->getMemEspc()<<"\n";
         
@@ -277,6 +356,3 @@ public:
     }
 
 };
-
-
-

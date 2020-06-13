@@ -1,38 +1,48 @@
 #include "GarbageCollector.hpp"
-#include <thread>
 #include "pthread.h"
+#include <thread>
 #include <chrono>
+#include <sstream>
 //#include "Lista.hpp"
 
 using namespace std;
 
 bool  Collector::collector_activado = false;
 Collector* Collector::garbageColector = NULL;
-
+/**
+ * @brief Constructor del garbage collector
+ * @author Mat
+ * */
 Collector::Collector(){
     referenceCnt = 0;
     garbageColector = NULL;
 }
 
-
+/**
+ * @brief Destructor del Garbage collector
+ * @author Mat
+*/
 Collector::~Collector(){
     cout<<"Se dejó de llamar al GarbageCollector";
     collector_activado = false;
 }
 
-
+/**
+ * @brief Inicializa el Garbage Collector
+ * @author Mat
+ */
 Collector *Collector::myCollector(){
     if(garbageColector == NULL){
         garbageColector = new Collector();
         cout<<"Se inicializo el Garbage\n";
         collector_activado = true;
-        vaciarJson();
 
     }
     return garbageColector;
 }
-
-
+/**
+ * @brief Funcion para vaciar el archivo JSON
+ * */
 void Collector::vaciarJson(){
     ifstream url("JSONFiles/prueba.json");
     IStreamWrapper isw(url);
@@ -44,8 +54,13 @@ void Collector::vaciarJson(){
     Writer<OStreamWrapper> writer2(osw);
     doc.Accept(writer2);
 }
-
-
+/**
+ * @brief Agrega un dato de tipo int a la lista de referencias del Garbage Collector y le nasigna un espacio de memoria
+ * @author Mat
+ * @param memEspc Puntero hacia el dato del VSPTR
+ * @return id del VSPTR
+ * @overload
+ */
 int Collector::addPtr(int *memEspc){
         garbageColector->lista->agregarNodo(memEspc,referenceCnt);
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
@@ -60,15 +75,18 @@ int Collector::addPtr(int *memEspc){
         ssCnt<<referenceCnt;
         ssR<<1;
         ssM<<*memEspc;
-        cout<<"Desde add "<< memEspc<<"\n";
-        cout<<"Desde add "<< *memEspc<<"\n";
 
         addJsonObj(strEspacio.c_str(),ssM.str().c_str(), ssCnt.str().c_str(), ssR.str().c_str(), "int");
-        
+
         return garbageColector->referenceCnt++;
 }
-
-
+/**
+ * @brief Agrega un dato de tipo double a la lista de referencias del Garbage Collector y le nasigna un espacio de memoria
+ * @author Mat
+ * @param memEspc Puntero hacia el dato del VSPTR
+ * @return id del VSPTR
+ * @overload
+ */
 int Collector::addPtr(double *memEspc){
         garbageColector->listaD->agregarNodo(memEspc,referenceCnt);
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
@@ -90,7 +108,13 @@ int Collector::addPtr(double *memEspc){
         
         return garbageColector->referenceCnt++;
 }
-
+/**
+ * @brief Agrega un dato de tipo float a la lista de referencias del Garbage Collector y le nasigna un espacio de memoria
+ * @author Mat
+* @param memEspc Puntero hacia el dato del VSPTR
+ * @return id del VSPTR
+ * @overload
+ */
 int Collector::addPtr(float *memEspc){
         garbageColector->listaF->agregarNodo(memEspc,referenceCnt);
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
@@ -110,9 +134,14 @@ int Collector::addPtr(float *memEspc){
 
         return garbageColector->referenceCnt++;
 }
-
+/**
+ * @brief Agrega un dato de tipo long a la lista de referencias del Garbage Collector y le nasigna un espacio de memoria
+ * @author Mat
+ * @param memEspc Puntero hacia el dato del VSPTR
+ * @return id del VSPTR
+ * @overload
+ */
 int Collector::addPtr(long *memEspc){
-
         garbageColector->listaL->agregarNodo(memEspc,referenceCnt);
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
         cout<<"Espacio de memoria " <<memEspc<<"\n";
@@ -131,7 +160,13 @@ int Collector::addPtr(long *memEspc){
 
         return garbageColector->referenceCnt++;
 }
-
+/**
+ * @brief Agrega un dato de tipo char a la lista de referencias del Garbage Collector y le nasigna un espacio de memoria
+ * @author Mat
+ * @param memEspc Puntero hacia el dato del VSPTR
+ * @return id del VSPTR
+ * @overload
+ */
 int Collector::addPtr(char *memEspc){
         garbageColector->listaC->agregarNodo(memEspc,referenceCnt);
         cout<<"Se agrego "<<garbageColector->referenceCnt<<"\n";
@@ -151,7 +186,11 @@ int Collector::addPtr(char *memEspc){
 
         return garbageColector->referenceCnt++;
 }
-
+/**
+ * @brief Busca el VSPR en las listas y le decrementa la referencia 
+ * @param id Identificador de un VSPTR
+ * @author Mat
+ * */
 void Collector::dereference(int id){
     if (id != -1)
     {
@@ -171,6 +210,11 @@ void Collector::dereference(int id){
             
 }
 
+/**
+ * @brief Busca el VSPTR en las listas y le incrementa la referencia
+ * @author Mat
+ * @param id Identificador de un VSPTR
+*/
 void Collector::reference(int id){
     if (id != -1)
     {
@@ -187,6 +231,10 @@ void Collector::reference(int id){
     } 
 }
 
+/**
+ * @brief Busca en todos los nodos datos que no tengan referencia y los elimina
+ * @author Mat
+ * */
 void Collector::garbage(){
     Nodo<int> *aux = garbageColector->lista->getHead();
     while(aux != NULL){
@@ -222,18 +270,12 @@ void Collector::garbage(){
             garbageColector->listaC->eliminarNodo(aux5);
         aux5 = aux5->getSig();
     }
-    
-    /*
-    for(int i=0;i<garbageColector->referenceCnt;i++){
-        
-        if (garbageColector->lista->getReferencias(i) == -1)
-        {
-            garbageColector->lista->eliminarNodo(i);
-        }
-        
-    }*/
 }
 
+/**
+ * @brief Funcion encargada de llamar al garbage collector cada segundo
+ * @author Mat
+ * */
 void Collector::llamador(){
     while (collector_activado)
     {        
@@ -243,15 +285,21 @@ void Collector::llamador(){
     }
     
 }
-
-
-
+/**
+ * @brief Funcion encargada de crear el JSON con los datos de los VSPTR
+ * @param espacio Espacio de memoria del dato a almacenar en JSON
+ * @param dato Dato a guardar en el JSON
+ * @param id Id del VSPTR a almacenar en JSON
+ * @param ref Numero de referencias del dato a guardar 
+ * @param tipo Tipo de dato a guardar
+ * */
 void Collector::addJsonObj(string espacio,string dato, string id, string ref, string tipo ){
     
     ifstream url("JSONFiles/prueba.json");
     IStreamWrapper isw(url);
     Document doc;
     doc.ParseStream(isw);
+    
     Value o(kObjectType);
     {
         
@@ -272,15 +320,7 @@ void Collector::addJsonObj(string espacio,string dato, string id, string ref, st
     }
 
     
-    //Value name;
-    //name = StringRef();
-    //doc.RemoveAllMembers();
     doc.AddMember(StringRef(id.c_str()),o,doc.GetAllocator());//Agrega al archivo
-    //int x = 1;
-    /*if(x == 1){
-        if(doc.HasMember("valor"))//***
-           // doc.EraseMember("valor");//Elimina elementos del doc***
-    }*/
     ofstream ofs2("JSONFiles/prueba.json");
     OStreamWrapper osw(ofs2);
     Writer<OStreamWrapper> writer2(osw);
