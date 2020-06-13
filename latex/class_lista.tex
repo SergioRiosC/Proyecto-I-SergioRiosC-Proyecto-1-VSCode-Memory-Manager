@@ -1,0 +1,250 @@
+\hypertarget{class_lista}{}\doxysection{Lista$<$ L $>$ Class Template Reference}
+\label{class_lista}\index{Lista$<$ L $>$@{Lista$<$ L $>$}}
+
+
+Clase que contiene la lista enlazada de los datos.  
+
+
+
+
+{\ttfamily \#include $<$Lista.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_lista_a7ff2efadc7390122aa1e256fc7530c22}{Lista}} ()
+\begin{DoxyCompactList}\small\item\em constructor de la lista \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_nodo}{Nodo}}$<$ L $>$ $\ast$ \mbox{\hyperlink{class_lista_a3753fe3d22939f3ce66a53071206f0d0}{get\+Head}} ()
+\begin{DoxyCompactList}\small\item\em Funcion para obtener la cabeza de la lista. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lista_a9bc50af001a5c5918d8b90e873df32fd}{vacia}} ()
+\begin{DoxyCompactList}\small\item\em Funcion para saber si la lista esta vacia. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_nodo}{Nodo}}$<$ L $>$ $\ast$ \mbox{\hyperlink{class_lista_af9c1d13a79d0dace1fca33dd9522ea27}{buscar\+Nodo}} (int id)
+\begin{DoxyCompactList}\small\item\em Funcion para encontrar un nodo especifico. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lista_ab8fa2f5e3751751e0ef3e44d48064f1a}{reference}} (int id)
+\begin{DoxyCompactList}\small\item\em Funcion para agregar referencias a un dato. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lista_a4e5958727d19b941c1983245f20e5e90}{dereference}} (int id)
+\begin{DoxyCompactList}\small\item\em Funcion para quitar referencias a un dato. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lista_a252629562a4331b3d43c621c2073b59d}{modificar\+Ref\+Json}} (string id, string referencias)
+\begin{DoxyCompactList}\small\item\em Funcion para agregar datos al archivo J\+S\+ON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lista_ab3a1e6e3c3867d59c2e84a05fa0cde92}{agregar\+Nodo}} (L $\ast$new\+Dato, int id)
+\begin{DoxyCompactList}\small\item\em Funcion para agregar un nodo a la lista. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lista_aebcd89439b001f0afb960ef34f90b33e}{del\+Json}} (string id)
+\begin{DoxyCompactList}\small\item\em Funcion para eliminar contenido del archivo J\+S\+ON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lista_ae3b318bd52e1bb31cd1901b47f7db479}{eliminar\+Nodo}} (\mbox{\hyperlink{class_nodo}{Nodo}}$<$ L $>$ $\ast$nodo)
+\begin{DoxyCompactList}\small\item\em Funcion para eliminar algun nodo de la lista. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename L$>$\newline
+class Lista$<$ L $>$}
+
+Clase que contiene la lista enlazada de los datos. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_lista_a7ff2efadc7390122aa1e256fc7530c22}\label{class_lista_a7ff2efadc7390122aa1e256fc7530c22}} 
+\index{Lista$<$ L $>$@{Lista$<$ L $>$}!Lista@{Lista}}
+\index{Lista@{Lista}!Lista$<$ L $>$@{Lista$<$ L $>$}}
+\doxysubsubsection{\texorpdfstring{Lista()}{Lista()}}
+{\footnotesize\ttfamily template$<$typename L $>$ \\
+\mbox{\hyperlink{class_lista}{Lista}}$<$ L $>$\+::\mbox{\hyperlink{class_lista}{Lista}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor de la lista 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_lista_ab3a1e6e3c3867d59c2e84a05fa0cde92}\label{class_lista_ab3a1e6e3c3867d59c2e84a05fa0cde92}} 
+\index{Lista$<$ L $>$@{Lista$<$ L $>$}!agregarNodo@{agregarNodo}}
+\index{agregarNodo@{agregarNodo}!Lista$<$ L $>$@{Lista$<$ L $>$}}
+\doxysubsubsection{\texorpdfstring{agregarNodo()}{agregarNodo()}}
+{\footnotesize\ttfamily template$<$typename L $>$ \\
+void \mbox{\hyperlink{class_lista}{Lista}}$<$ L $>$\+::agregar\+Nodo (\begin{DoxyParamCaption}\item[{L $\ast$}]{new\+Dato,  }\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para agregar un nodo a la lista. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Dato} & dato a agregar \\
+\hline
+{\em id} & id del dato a agregar \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_lista_af9c1d13a79d0dace1fca33dd9522ea27}\label{class_lista_af9c1d13a79d0dace1fca33dd9522ea27}} 
+\index{Lista$<$ L $>$@{Lista$<$ L $>$}!buscarNodo@{buscarNodo}}
+\index{buscarNodo@{buscarNodo}!Lista$<$ L $>$@{Lista$<$ L $>$}}
+\doxysubsubsection{\texorpdfstring{buscarNodo()}{buscarNodo()}}
+{\footnotesize\ttfamily template$<$typename L $>$ \\
+\mbox{\hyperlink{class_nodo}{Nodo}}$<$L$>$$\ast$ \mbox{\hyperlink{class_lista}{Lista}}$<$ L $>$\+::buscar\+Nodo (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para encontrar un nodo especifico. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & id del nodo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nodo buscado 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_lista_aebcd89439b001f0afb960ef34f90b33e}\label{class_lista_aebcd89439b001f0afb960ef34f90b33e}} 
+\index{Lista$<$ L $>$@{Lista$<$ L $>$}!delJson@{delJson}}
+\index{delJson@{delJson}!Lista$<$ L $>$@{Lista$<$ L $>$}}
+\doxysubsubsection{\texorpdfstring{delJson()}{delJson()}}
+{\footnotesize\ttfamily template$<$typename L $>$ \\
+void \mbox{\hyperlink{class_lista}{Lista}}$<$ L $>$\+::del\+Json (\begin{DoxyParamCaption}\item[{string}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para eliminar contenido del archivo J\+S\+ON. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & id del dato a eliminar \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_lista_a4e5958727d19b941c1983245f20e5e90}\label{class_lista_a4e5958727d19b941c1983245f20e5e90}} 
+\index{Lista$<$ L $>$@{Lista$<$ L $>$}!dereference@{dereference}}
+\index{dereference@{dereference}!Lista$<$ L $>$@{Lista$<$ L $>$}}
+\doxysubsubsection{\texorpdfstring{dereference()}{dereference()}}
+{\footnotesize\ttfamily template$<$typename L $>$ \\
+bool \mbox{\hyperlink{class_lista}{Lista}}$<$ L $>$\+::dereference (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para quitar referencias a un dato. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & id del nodo que contiene el dato a dereferenciar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true si encuentra el nodo. False si no lo encuentra 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_lista_ae3b318bd52e1bb31cd1901b47f7db479}\label{class_lista_ae3b318bd52e1bb31cd1901b47f7db479}} 
+\index{Lista$<$ L $>$@{Lista$<$ L $>$}!eliminarNodo@{eliminarNodo}}
+\index{eliminarNodo@{eliminarNodo}!Lista$<$ L $>$@{Lista$<$ L $>$}}
+\doxysubsubsection{\texorpdfstring{eliminarNodo()}{eliminarNodo()}}
+{\footnotesize\ttfamily template$<$typename L $>$ \\
+void \mbox{\hyperlink{class_lista}{Lista}}$<$ L $>$\+::eliminar\+Nodo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_nodo}{Nodo}}$<$ L $>$ $\ast$}]{nodo }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para eliminar algun nodo de la lista. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em nodo} & \mbox{\hyperlink{class_nodo}{Nodo}} a eliminar \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_lista_a3753fe3d22939f3ce66a53071206f0d0}\label{class_lista_a3753fe3d22939f3ce66a53071206f0d0}} 
+\index{Lista$<$ L $>$@{Lista$<$ L $>$}!getHead@{getHead}}
+\index{getHead@{getHead}!Lista$<$ L $>$@{Lista$<$ L $>$}}
+\doxysubsubsection{\texorpdfstring{getHead()}{getHead()}}
+{\footnotesize\ttfamily template$<$typename L $>$ \\
+\mbox{\hyperlink{class_nodo}{Nodo}}$<$L$>$$\ast$ \mbox{\hyperlink{class_lista}{Lista}}$<$ L $>$\+::get\+Head (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para obtener la cabeza de la lista. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+cabeza de la lista 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_lista_a252629562a4331b3d43c621c2073b59d}\label{class_lista_a252629562a4331b3d43c621c2073b59d}} 
+\index{Lista$<$ L $>$@{Lista$<$ L $>$}!modificarRefJson@{modificarRefJson}}
+\index{modificarRefJson@{modificarRefJson}!Lista$<$ L $>$@{Lista$<$ L $>$}}
+\doxysubsubsection{\texorpdfstring{modificarRefJson()}{modificarRefJson()}}
+{\footnotesize\ttfamily template$<$typename L $>$ \\
+void \mbox{\hyperlink{class_lista}{Lista}}$<$ L $>$\+::modificar\+Ref\+Json (\begin{DoxyParamCaption}\item[{string}]{id,  }\item[{string}]{referencias }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para agregar datos al archivo J\+S\+ON. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & id del dato a agregar \\
+\hline
+{\em referencias} & cantidad de referencias del dato \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_lista_ab8fa2f5e3751751e0ef3e44d48064f1a}\label{class_lista_ab8fa2f5e3751751e0ef3e44d48064f1a}} 
+\index{Lista$<$ L $>$@{Lista$<$ L $>$}!reference@{reference}}
+\index{reference@{reference}!Lista$<$ L $>$@{Lista$<$ L $>$}}
+\doxysubsubsection{\texorpdfstring{reference()}{reference()}}
+{\footnotesize\ttfamily template$<$typename L $>$ \\
+bool \mbox{\hyperlink{class_lista}{Lista}}$<$ L $>$\+::reference (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para agregar referencias a un dato. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & id del nodo al que se le agregan las referencias \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true si ecuentra el nodo. False si no lo encuentra 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_lista_a9bc50af001a5c5918d8b90e873df32fd}\label{class_lista_a9bc50af001a5c5918d8b90e873df32fd}} 
+\index{Lista$<$ L $>$@{Lista$<$ L $>$}!vacia@{vacia}}
+\index{vacia@{vacia}!Lista$<$ L $>$@{Lista$<$ L $>$}}
+\doxysubsubsection{\texorpdfstring{vacia()}{vacia()}}
+{\footnotesize\ttfamily template$<$typename L $>$ \\
+bool \mbox{\hyperlink{class_lista}{Lista}}$<$ L $>$\+::vacia (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Funcion para saber si la lista esta vacia. 
+
+\begin{DoxyAuthor}{Author}
+Mat 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+true si esta vacia. False si no lo esta 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Lista.\+hpp\end{DoxyCompactItemize}
